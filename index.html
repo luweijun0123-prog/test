@@ -8,17 +8,24 @@
     </script>
     <style>
         :root {
+            --blue-50: #eff6ff;
+            --blue-100: #dbeafe;
+            --blue-500: #3b82f6;
             --blue-600: #2563eb;
             --blue-700: #1d4ed8;
+            --blue-800: #1e40af;
             --red-500: #ef4444;
             --red-600: #dc2626;
+            --red-700: #b91c1c;
             --gray-50: #f8fafc;
             --gray-100: #f1f5f9;
             --gray-200: #e2e8f0;
-            --gray-400: #94a3b8;
-            --gray-500: #64748b;
-            --gray-600: #475569;
-            --gray-800: #1e293b;
+            --gray-300: #cbd5e1;
+            --gray-400: #9ca3af;
+            --gray-500: #6b7280;
+            --gray-600: #4b5563;
+            --gray-700: #374151;
+            --gray-800: #1f2937;
             --white: #ffffff;
         }
 
@@ -28,21 +35,23 @@
         }
 
         body {
-            background: #eef2f6;
+            background: #eef2f7;
             font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen', 'Ubuntu', 'Helvetica Neue', sans-serif;
             min-height: 100vh;
             min-height: 100dvh;
             display: flex;
             align-items: center;
             justify-content: center;
-            padding: 20px;
+            padding: 16px;
             -webkit-font-smoothing: antialiased;
+            -moz-osx-font-smoothing: grayscale;
             background-image:
-                radial-gradient(ellipse at 20% 0%, rgba(37, 99, 235, 0.06) 0%, transparent 50%),
-                radial-gradient(ellipse at 80% 100%, rgba(37, 99, 235, 0.04) 0%, transparent 50%);
+                radial-gradient(ellipse at 15% 0%, rgba(37, 99, 235, 0.06) 0%, transparent 55%),
+                radial-gradient(ellipse at 85% 100%, rgba(37, 99, 235, 0.04) 0%, transparent 55%),
+                radial-gradient(ellipse at 50% 50%, rgba(59, 130, 246, 0.03) 0%, transparent 70%);
         }
 
-        /* Fixed‑size page wrapper (640×960) */
+        /* Fixed‑size page wrapper: 640×960, centered */
         .page-wrapper {
             width: 640px;
             max-width: 100%;
@@ -50,83 +59,110 @@
             max-height: 100vh;
             margin: 0 auto;
             border-radius: 20px;
-            box-shadow: 0 20px 50px rgba(0, 0, 0, 0.1), 0 0 0 1px rgba(0, 0, 0, 0.04);
+            box-shadow:
+                0 24px 56px rgba(0, 0, 0, 0.10),
+                0 0 0 1px rgba(0, 0, 0, 0.04);
             display: flex;
             flex-direction: column;
             background: #ffffff;
             overflow: hidden;
-            animation: fadeInUp 0.5s ease-out;
+            animation: pageEnter 0.5s cubic-bezier(0.22, 0.61, 0.36, 1);
+            position: relative;
         }
 
-        @keyframes fadeInUp {
+        @keyframes pageEnter {
             from {
                 opacity: 0;
-                transform: translateY(20px);
+                transform: translateY(24px) scale(0.98);
             }
             to {
                 opacity: 1;
-                transform: translateY(0);
+                transform: translateY(0) scale(1);
             }
         }
 
-        /* Header card */
+        /* Header */
         .header-card {
-            background: linear-gradient(135deg, #1e3a8a 0%, #2563eb 100%);
+            background: linear-gradient(145deg, #1e3a8a 0%, #2563eb 40%, #3b82f6 100%);
             border-radius: 20px 20px 0 0;
-            padding: 28px 32px 24px;
+            padding: 28px 30px 22px;
             color: #ffffff;
             position: relative;
             overflow: hidden;
             flex-shrink: 0;
-            box-shadow: 0 6px 24px rgba(37, 99, 235, 0.25);
+            box-shadow: 0 6px 28px rgba(37, 99, 235, 0.25);
             z-index: 2;
         }
 
-        /* Decorative game elements */
+        /* Decorative game‑style glow orbs */
         .header-card::after {
             content: '';
             position: absolute;
-            top: -60px;
-            right: -30px;
-            width: 160px;
-            height: 160px;
-            background: rgba(255, 255, 255, 0.05);
+            top: -70px;
+            right: -40px;
+            width: 180px;
+            height: 180px;
+            background: radial-gradient(circle, rgba(255, 255, 255, 0.07) 0%, transparent 70%);
             border-radius: 50%;
             pointer-events: none;
         }
         .header-card::before {
             content: '';
             position: absolute;
-            bottom: -40px;
-            left: -40px;
-            width: 120px;
-            height: 120px;
-            background: rgba(255, 255, 255, 0.04);
+            bottom: -50px;
+            left: -50px;
+            width: 140px;
+            height: 140px;
+            background: radial-gradient(circle, rgba(255, 255, 255, 0.05) 0%, transparent 70%);
             border-radius: 50%;
             pointer-events: none;
         }
 
+        /* Small floating diamond decoration */
+        .header-decor {
+            position: absolute;
+            top: 14px;
+            right: 20px;
+            width: 22px;
+            height: 22px;
+            background: rgba(255, 255, 255, 0.12);
+            transform: rotate(45deg);
+            border-radius: 3px;
+            pointer-events: none;
+            animation: floatDiamond 4s ease-in-out infinite;
+            z-index: 1;
+        }
+        @keyframes floatDiamond {
+            0%,
+            100% {
+                transform: rotate(45deg) translateY(0);
+            }
+            50% {
+                transform: rotate(45deg) translateY(-8px);
+            }
+        }
+
         .header-icon-circle {
-            width: 52px;
-            height: 52px;
-            border-radius: 16px;
-            background: rgba(255, 255, 255, 0.15);
+            width: 50px;
+            height: 50px;
+            border-radius: 15px;
+            background: rgba(255, 255, 255, 0.16);
             backdrop-filter: blur(6px);
             display: flex;
             align-items: center;
             justify-content: center;
-            font-size: 26px;
             flex-shrink: 0;
-            border: 1px solid rgba(255, 255, 255, 0.15);
+            border: 1px solid rgba(255, 255, 255, 0.18);
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.10);
         }
 
-        /* Content card */
+        /* Content area */
         .content-card {
             flex: 1;
             overflow-y: auto;
             background: #ffffff;
             border-radius: 0 0 20px 20px;
-            padding: 24px 28px 28px;
+            padding: 22px 26px 26px;
             scrollbar-width: thin;
             scrollbar-color: #cbd5e1 transparent;
         }
@@ -135,63 +171,66 @@
         }
         .content-card::-webkit-scrollbar-track {
             background: transparent;
+            margin: 4px 0;
         }
         .content-card::-webkit-scrollbar-thumb {
-            background: #cbd5e1;
-            border-radius: 10px;
+            background: #d1d5db;
+            border-radius: 20px;
         }
 
         /* Function card */
         .func-card {
             background: #ffffff;
-            border: 1px solid #e8ecf1;
+            border: 1px solid #e5e7eb;
             border-radius: 16px;
             padding: 20px 20px 16px;
-            transition: all 0.25s ease;
+            transition: all 0.3s ease;
             position: relative;
         }
         .func-card:first-child {
             margin-bottom: 18px;
         }
         .func-card:hover {
-            border-color: #d0d7e2;
-            box-shadow: 0 8px 24px rgba(0, 0, 0, 0.04);
+            border-color: #c7d2fe;
+            box-shadow: 0 8px 28px rgba(37, 99, 235, 0.06);
         }
 
+        /* Icon circles */
         .func-icon {
             width: 44px;
             height: 44px;
-            border-radius: 12px;
+            border-radius: 13px;
             display: flex;
             align-items: center;
             justify-content: center;
             flex-shrink: 0;
-            font-size: 20px;
         }
-        .func-icon.submit {
+        .func-icon.icon-submit {
             background: #fef2f2;
             color: #ef4444;
+            box-shadow: 0 2px 8px rgba(239, 68, 68, 0.12);
         }
-        .func-icon.check {
+        .func-icon.icon-check {
             background: #eff6ff;
             color: #2563eb;
+            box-shadow: 0 2px 8px rgba(37, 99, 235, 0.12);
         }
 
-        /* Submit button - red (game style) */
+        /* Submit button – red gradient */
         .btn-submit {
             display: inline-flex;
             align-items: center;
             justify-content: center;
-            gap: 10px;
+            gap: 9px;
             width: 100%;
             padding: 14px 24px;
             font-size: 17px;
             font-weight: 700;
-            letter-spacing: 0.3px;
+            letter-spacing: 0.25px;
             border-radius: 14px;
             border: none;
             cursor: pointer;
-            transition: all 0.25s ease;
+            transition: all 0.28s cubic-bezier(0.4, 0, 0.2, 1);
             color: #ffffff;
             background: linear-gradient(180deg, #ef4444 0%, #dc2626 100%);
             min-height: 52px;
@@ -201,18 +240,24 @@
             outline: none;
             position: relative;
             overflow: hidden;
-            box-shadow: 0 4px 14px rgba(220, 38, 38, 0.3), 0 1px 2px rgba(255, 255, 255, 0.15) inset;
-            text-shadow: 0 1px 1px rgba(0, 0, 0, 0.2);
+            box-shadow:
+                0 4px 16px rgba(220, 38, 38, 0.28),
+                0 1px 2px rgba(255, 255, 255, 0.12) inset;
+            text-shadow: 0 1px 1px rgba(0, 0, 0, 0.18);
         }
         .btn-submit:hover:not(:disabled) {
             background: linear-gradient(180deg, #f87171 0%, #dc2626 100%);
-            box-shadow: 0 6px 20px rgba(220, 38, 38, 0.45), 0 1px 2px rgba(255, 255, 255, 0.2) inset;
-            transform: translateY(-1px);
+            box-shadow:
+                0 7px 24px rgba(220, 38, 38, 0.40),
+                0 1px 3px rgba(255, 255, 255, 0.18) inset;
+            transform: translateY(-2px);
         }
         .btn-submit:active:not(:disabled) {
-            transform: scale(0.975);
-            box-shadow: 0 2px 8px rgba(220, 38, 38, 0.3);
-            transition: all 0.08s ease;
+            transform: scale(0.97);
+            box-shadow:
+                0 2px 8px rgba(220, 38, 38, 0.25),
+                0 0px 1px rgba(255, 255, 255, 0.08) inset;
+            transition: all 0.06s ease;
         }
         .btn-submit:disabled {
             background: #d1d5db;
@@ -220,25 +265,25 @@
             cursor: not-allowed;
             box-shadow: none;
             text-shadow: none;
-            pointer-events: none;
+            pointer-events: auto;
             border: 1px solid #e5e7eb;
         }
 
-        /* Check button - blue */
+        /* Check button – blue gradient */
         .btn-check {
             display: inline-flex;
             align-items: center;
             justify-content: center;
-            gap: 10px;
+            gap: 9px;
             width: 100%;
             padding: 14px 24px;
             font-size: 17px;
             font-weight: 700;
-            letter-spacing: 0.3px;
+            letter-spacing: 0.25px;
             border-radius: 14px;
             border: none;
             cursor: pointer;
-            transition: all 0.25s ease;
+            transition: all 0.28s cubic-bezier(0.4, 0, 0.2, 1);
             color: #ffffff;
             background: linear-gradient(180deg, #3b82f6 0%, #2563eb 100%);
             min-height: 52px;
@@ -248,64 +293,109 @@
             outline: none;
             position: relative;
             overflow: hidden;
-            box-shadow: 0 4px 14px rgba(37, 99, 235, 0.3), 0 1px 2px rgba(255, 255, 255, 0.2) inset;
-            text-shadow: 0 1px 1px rgba(0, 0, 0, 0.15);
+            box-shadow:
+                0 4px 16px rgba(37, 99, 235, 0.28),
+                0 1px 2px rgba(255, 255, 255, 0.15) inset;
+            text-shadow: 0 1px 1px rgba(0, 0, 0, 0.12);
         }
         .btn-check:hover {
             background: linear-gradient(180deg, #60a5fa 0%, #2563eb 100%);
-            box-shadow: 0 6px 20px rgba(37, 99, 235, 0.45), 0 1px 2px rgba(255, 255, 255, 0.25) inset;
-            transform: translateY(-1px);
+            box-shadow:
+                0 7px 24px rgba(37, 99, 235, 0.40),
+                0 1px 3px rgba(255, 255, 255, 0.22) inset;
+            transform: translateY(-2px);
         }
         .btn-check:active {
-            transform: scale(0.975);
-            box-shadow: 0 2px 8px rgba(37, 99, 235, 0.3);
-            transition: all 0.08s ease;
+            transform: scale(0.97);
+            box-shadow:
+                0 2px 8px rgba(37, 99, 235, 0.25),
+                0 0px 1px rgba(255, 255, 255, 0.10) inset;
+            transition: all 0.06s ease;
         }
 
-        /* Expired hint */
-        .expired-hint {
+        /* Modal overlay */
+        .modal-overlay {
             display: none;
+            position: absolute;
+            inset: 0;
+            background: rgba(0, 0, 0, 0.50);
+            z-index: 50;
             align-items: center;
-            gap: 6px;
-            margin-top: 10px;
-            font-size: 14px;
-            font-weight: 600;
-            color: #ef4444;
-            letter-spacing: 0.2px;
+            justify-content: center;
+            animation: fadeIn 0.2s ease;
+            border-radius: 20px;
         }
-        .expired-hint.visible {
+        .modal-overlay.active {
             display: flex;
         }
-        .expired-dot {
-            width: 8px;
-            height: 8px;
-            border-radius: 50%;
-            background: #ef4444;
-            flex-shrink: 0;
-            animation: blinkRed 1.2s ease-in-out infinite;
-        }
-        @keyframes blinkRed {
-            0%,
-            100% {
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+            }
+            to {
                 opacity: 1;
             }
-            50% {
-                opacity: 0.35;
+        }
+
+        /* Modal dialog */
+        .modal-dialog {
+            background: #ffffff;
+            border-radius: 18px;
+            padding: 28px 24px 22px;
+            width: 85%;
+            max-width: 340px;
+            text-align: center;
+            box-shadow: 0 20px 50px rgba(0, 0, 0, 0.25);
+            animation: dialogPop 0.28s cubic-bezier(0.34, 1.56, 0.64, 1);
+            position: relative;
+        }
+        @keyframes dialogPop {
+            from {
+                opacity: 0;
+                transform: scale(0.85);
+            }
+            to {
+                opacity: 1;
+                transform: scale(1);
             }
         }
+        .modal-icon-circle {
+            width: 56px;
+            height: 56px;
+            border-radius: 50%;
+            background: #fef2f2;
+            margin: 0 auto 16px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 26px;
+            color: #ef4444;
+            box-shadow: 0 4px 16px rgba(239, 68, 68, 0.18);
+        }
+        .modal-close-btn {
+            display: inline-block;
+            margin-top: 18px;
+            padding: 10px 32px;
+            font-size: 15px;
+            font-weight: 600;
+            letter-spacing: 0.2px;
+            border-radius: 10px;
+            border: none;
+            cursor: pointer;
+            background: #2563eb;
+            color: #ffffff;
+            transition: all 0.2s ease;
+            box-shadow: 0 3px 10px rgba(37, 99, 235, 0.25);
+        }
+        .modal-close-btn:hover {
+            background: #1d4ed8;
+            box-shadow: 0 5px 16px rgba(37, 99, 235, 0.35);
+        }
+        .modal-close-btn:active {
+            transform: scale(0.95);
+        }
 
-        /* Loading state for submit button */
-        .btn-submit .loading-text {
-            display: none;
-        }
-        .btn-submit.loading .default-text {
-            display: none;
-        }
-        .btn-submit.loading .loading-text {
-            display: inline;
-        }
-
-        /* Responsive adjustments for small screens */
+        /* Responsive adjustments */
         @media (max-width: 680px) {
             .page-wrapper {
                 width: 100%;
@@ -313,24 +403,41 @@
                 min-height: 100vh;
                 border-radius: 0;
                 box-shadow: none;
+                max-height: none;
             }
             .header-card {
                 border-radius: 0;
-                padding: 20px 20px 18px;
+                padding: 20px 18px 16px;
             }
             .content-card {
                 border-radius: 0;
-                padding: 16px;
+                padding: 14px 14px 16px;
             }
             .func-card {
                 padding: 16px 14px 14px;
             }
             .btn-submit,
             .btn-check {
-                padding: 12px 16px;
+                padding: 13px 16px;
                 font-size: 16px;
                 min-height: 48px;
+                border-radius: 13px;
+            }
+            .header-icon-circle {
+                width: 40px;
+                height: 40px;
                 border-radius: 12px;
+            }
+            .func-icon {
+                width: 38px;
+                height: 38px;
+                border-radius: 11px;
+            }
+            .modal-overlay {
+                border-radius: 0;
+            }
+            .header-decor {
+                display: none;
             }
         }
     </style>
@@ -341,18 +448,21 @@
 
         <!-- Header -->
         <div class="header-card">
+            <!-- Decorative floating diamond -->
+            <div class="header-decor" aria-hidden="true"></div>
+
             <div style="display:flex;align-items:center;gap:14px;position:relative;z-index:1;">
                 <div class="header-icon-circle" aria-hidden="true">
-                    <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
                         <circle cx="12" cy="12" r="10"/>
                         <path d="M12 6v6l4 2"/>
                     </svg>
                 </div>
                 <div>
-                    <h1 style="font-size:22px;font-weight:700;color:#ffffff;margin:0;line-height:1.3;letter-spacing:0.2px;">
+                    <h1 style="font-size:21px;font-weight:700;color:#ffffff;margin:0;line-height:1.3;letter-spacing:0.2px;">
                         Tomb Busters Ticket System
                     </h1>
-                    <p style="font-size:13px;color:rgba(255,255,255,0.8);margin:4px 0 0;letter-spacing:0.2px;">
+                    <p style="font-size:13px;color:rgba(255,255,255,0.78);margin:3px 0 0;letter-spacing:0.15px;">
                         Player support center
                     </p>
                 </div>
@@ -365,16 +475,15 @@
             <!-- Submit Ticket Card -->
             <div class="func-card">
                 <div style="display:flex;align-items:center;gap:12px;margin-bottom:14px;">
-                    <div class="func-icon submit" aria-hidden="true">
+                    <div class="func-icon icon-submit" aria-hidden="true">
                         <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
                             <path d="M12 5v14M5 12h14"/>
                         </svg>
                     </div>
-                    <span style="font-size:16px;font-weight:600;color:#1e293b;letter-spacing:0.2px;">
+                    <span style="font-size:16px;font-weight:600;color:#1f2937;letter-spacing:0.15px;">
                         Submit a Ticket
                     </span>
                 </div>
-
                 <button
                 id="btnSubmit"
                 class="btn-submit"
@@ -385,30 +494,23 @@
             <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
                 <path d="M12 5v14M5 12h14"/>
             </svg>
-            <span class="default-text">Submit Ticket</span>
-            <span class="loading-text">Loading...</span>
+            Submit Ticket
         </button>
-
-        <!-- Expired hint (visible when disabled) -->
-        <div id="submitExpiredHint" class="expired-hint" aria-live="assertive">
-            <span class="expired-dot"></span> Link expired
-        </div>
     </div>
 
     <!-- Check Ticket Card -->
     <div class="func-card">
         <div style="display:flex;align-items:center;gap:12px;margin-bottom:14px;">
-            <div class="func-icon check" aria-hidden="true">
+            <div class="func-icon icon-check" aria-hidden="true">
                 <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
                     <circle cx="11" cy="11" r="8"/>
                     <path d="M21 21l-4.35-4.35"/>
                 </svg>
             </div>
-            <span style="font-size:16px;font-weight:600;color:#1e293b;letter-spacing:0.2px;">
+            <span style="font-size:16px;font-weight:600;color:#1f2937;letter-spacing:0.15px;">
                 Check Ticket Status
             </span>
         </div>
-
         <button
         id="btnCheck"
         class="btn-check"
@@ -422,8 +524,30 @@
     Check Ticket
 </button>
 </div>
-
 </div>
+
+<!-- Modal Overlay -->
+<div id="modalOverlay" class="modal-overlay" aria-hidden="true" role="dialog" aria-modal="true" aria-label="Expired notification">
+    <div class="modal-dialog">
+        <div class="modal-icon-circle" aria-hidden="true">
+            <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+                <circle cx="12" cy="12" r="10"/>
+                <line x1="12" y1="8" x2="12" y2="13"/>
+                <circle cx="12" cy="16.5" r="0.8" fill="currentColor" stroke="none"/>
+            </svg>
+        </div>
+        <p style="font-size:18px;font-weight:700;color:#1f2937;margin:0 0 6px;letter-spacing:0.2px;">
+            Link expired
+        </p>
+        <p style="font-size:13px;color:#6b7280;margin:0 0 2px;line-height:1.5;">
+            The submission window has closed or this link has already been used.
+        </p>
+        <button id="modalCloseBtn" class="modal-close-btn" type="button">
+            OK
+        </button>
+    </div>
+</div>
+
 </main>
 
 <script>
@@ -432,30 +556,26 @@
         // Constants
         // ============================================================
         const SUBMIT_URL =
-            'https://giantnetwork.qiyukf.com/worksheet/page/plugin/submit?pluginId=a105e6dee58a4b778686440c1418f704&type=1';
+            'https://giantnetwork.qiyukf.com/worksheet/page/plugin/submit?pluginId=a105e6dee58a4b77868640c1418f704&type=1';
         const CHECK_URL =
-            'https://giantnetwork.qiyukf.com/worksheet/page/plugin/list?pluginId=a105e6dee58a4b778686440c1418f704&type=1';
-        const WINDOW_MINUTES = 5; // 5-minute submission window
+            'https://giantnetwork.qiyukf.com/worksheet/page/plugin/list?pluginId=a105e6dee58a4b77868640c1418f704&type=1';
+        const WINDOW_MINUTES = 5; // Submission window: 5 minutes
         const WINDOW_MS = WINDOW_MINUTES * 60 * 1000;
-        const IP_API_URL = 'https://api.ipify.org?format=json';
-        const STORAGE_PREFIX = 'tomb_ticket_';
+        const STORAGE_KEY = 'tomb_ticket_session_v2'; // Key for localStorage
 
         // ============================================================
         // DOM Elements
         // ============================================================
         const btnSubmit = document.getElementById('btnSubmit');
         const btnCheck = document.getElementById('btnCheck');
-        const submitExpiredHint = document.getElementById('submitExpiredHint');
+        const modalOverlay = document.getElementById('modalOverlay');
+        const modalCloseBtn = document.getElementById('modalCloseBtn');
 
         // ============================================================
         // State
         // ============================================================
-        let playerIp = null;
-        let pageOpenTime = null; // When the page was opened
-        let windowExpireTime = null; // pageOpenTime + 5 minutes
-        let lastSubmitTime = null; // Timestamp of last submit from storage (for this IP)
-        let ipFetchFailed = false;
-        let windowTimerId = null;
+        let sessionData = null; // { code, createdAt, used }
+        let windowTimerId = null; // Timer for 5‑minute auto‑expiry
 
         // ============================================================
         // Safe localStorage helpers
@@ -477,98 +597,140 @@
             }
         }
 
-        // ============================================================
-        // Fetch public IP address
-        // ============================================================
-        async function fetchPublicIp() {
+        function safeRemoveItem(key) {
             try {
-                const response = await fetch(IP_API_URL);
-                if (!response.ok) throw new Error('IP fetch failed');
-                const data = await response.json();
-                return data.ip || null;
+                localStorage.removeItem(key);
+                return true;
             } catch (e) {
-                console.warn('[TicketSystem] IP fetch error:', e);
-                return null;
+                return false;
             }
         }
 
         // ============================================================
-        // Load last submit time for given IP from storage
+        // Generate a unique time‑based code
+        // Format: timestamp_randomHex
         // ============================================================
-        function loadLastSubmitTime(ip) {
-            const key = STORAGE_PREFIX + 'submit_ts_' + ip;
-            const stored = safeGetItem(key);
+        function generateUniqueCode() {
+            const now = Date.now();
+            const randomPart = Math.random().toString(36).substring(2, 12);
+            return now.toString(36) + '_' + randomPart;
+        }
+
+        // ============================================================
+        // Load existing session from localStorage, or create a new one
+        // ============================================================
+        function loadOrCreateSession() {
+            const stored = safeGetItem(STORAGE_KEY);
             if (stored) {
-                const timestamp = parseInt(stored, 10);
-                if (!isNaN(timestamp) && timestamp > 0) {
-                    return timestamp;
+                try {
+                    const parsed = JSON.parse(stored);
+                    // Validate structure
+                    if (parsed && typeof parsed.code === 'string' &&
+                        typeof parsed.createdAt === 'number' &&
+                        typeof parsed.used === 'boolean') {
+                        // Check if the session is still within the 5‑minute window
+                        const age = Date.now() - parsed.createdAt;
+                        if (age < WINDOW_MS) {
+                            // Session is still valid (may be used or unused)
+                            return parsed;
+                        }
+                        // Session expired – it will be replaced below
+                    }
+                } catch (e) {
+                    // Corrupted data – ignore and create new
                 }
             }
-            return null;
+            // No valid session found – create a brand‑new one
+            const newSession = {
+                code: generateUniqueCode(),
+                createdAt: Date.now(),
+                used: false,
+            };
+            safeSetItem(STORAGE_KEY, JSON.stringify(newSession));
+            return newSession;
         }
 
         // ============================================================
-        // Save submit time for current IP
+        // Save the current session data to localStorage
         // ============================================================
-        function saveSubmitTime(ip, timestamp) {
-            const key = STORAGE_PREFIX + 'submit_ts_' + ip;
-            safeSetItem(key, timestamp.toString());
+        function saveSession() {
+            if (sessionData) {
+                safeSetItem(STORAGE_KEY, JSON.stringify(sessionData));
+            }
         }
 
         // ============================================================
-        // Check if submit is currently allowed
+        // Check if submission is currently allowed
         // ============================================================
         function canSubmit() {
-            if (!playerIp || ipFetchFailed) return false;
+            if (!sessionData) return false;
             const now = Date.now();
-
-            // Window check: must be within the 5-minute page‑open window
-            if (now >= windowExpireTime) return false;
-
-            // IP repetition check: no submit yet OR last submit was ≥5 min ago
-            if (lastSubmitTime && (now - lastSubmitTime < WINDOW_MS)) return false;
-
+            // Must be within the 5‑minute window
+            if (now - sessionData.createdAt >= WINDOW_MS) return false;
+            // Must not have been used yet
+            if (sessionData.used) return false;
             return true;
         }
 
         // ============================================================
-        // Update the submit button UI to reflect the current state
+        // Update the submit button visual state
         // ============================================================
         function updateSubmitButtonState() {
-            const allowed = canSubmit();
-
-            if (allowed) {
+            if (canSubmit()) {
                 btnSubmit.disabled = false;
-                btnSubmit.classList.remove('loading');
                 btnSubmit.setAttribute('aria-disabled', 'false');
                 btnSubmit.title = 'Submit a new ticket';
-                submitExpiredHint.classList.remove('visible');
             } else {
                 btnSubmit.disabled = true;
-                btnSubmit.classList.remove('loading');
                 btnSubmit.setAttribute('aria-disabled', 'true');
                 btnSubmit.title = 'Submission unavailable';
-                submitExpiredHint.classList.add('visible');
             }
         }
 
         // ============================================================
-        // Handle the 5‑minute window expiration
+        // Show the "Link expired" modal dialog
         // ============================================================
-        function onWindowExpire() {
-            // Called when the 5‑minute timer fires
-            windowTimerId = null;
-            updateSubmitButtonState();
-            console.log('[TicketSystem] Submission window expired.');
+        function showExpiredModal() {
+            modalOverlay.classList.add('active');
+            modalOverlay.setAttribute('aria-hidden', 'false');
+            // Focus the close button for accessibility
+            setTimeout(function() {
+                modalCloseBtn.focus();
+            }, 100);
         }
 
+        // ============================================================
+        // Hide the modal dialog
+        // ============================================================
+        function hideExpiredModal() {
+            modalOverlay.classList.remove('active');
+            modalOverlay.setAttribute('aria-hidden', 'true');
+        }
+
+        // ============================================================
+        // Handle the 5‑minute window expiration (auto‑disable)
+        // ============================================================
+        function onWindowExpire() {
+            windowTimerId = null;
+            updateSubmitButtonState();
+            // Clean up expired session so a page refresh generates a fresh one
+            if (sessionData && Date.now() - sessionData.createdAt >= WINDOW_MS) {
+                safeRemoveItem(STORAGE_KEY);
+            }
+        }
+
+        // ============================================================
+        // Schedule the auto‑expiry timer
+        // ============================================================
         function scheduleWindowExpiration() {
             if (windowTimerId) clearTimeout(windowTimerId);
-            const remaining = windowExpireTime - Date.now();
+            if (!sessionData) return;
+            const elapsed = Date.now() - sessionData.createdAt;
+            const remaining = WINDOW_MS - elapsed;
             if (remaining <= 0) {
                 onWindowExpire();
             } else {
-                windowTimerId = setTimeout(onWindowExpire, remaining + 50); // +50ms buffer
+                windowTimerId = setTimeout(onWindowExpire, remaining + 80);
             }
         }
 
@@ -580,88 +742,133 @@
 
             // Re‑evaluate in real time
             if (!canSubmit()) {
-                updateSubmitButtonState();
-                // Brief visual shake
-                btnSubmit.style.transform = 'scale(0.95)';
-                setTimeout(() => { btnSubmit.style.transform = ''; }, 120);
+                // Show the modal with "Link expired"
+                showExpiredModal();
+                // Brief button shake feedback
+                btnSubmit.style.transform = 'scale(0.94)';
+                setTimeout(function() {
+                    btnSubmit.style.transform = '';
+                }, 140);
                 return false;
             }
 
-            // Record the submission timestamp
-            const now = Date.now();
-            saveSubmitTime(playerIp, now);
-            lastSubmitTime = now; // Update local variable
+            // Mark session as used
+            sessionData.used = true;
+            saveSession();
 
-            // Update UI (button will likely become disabled)
+            // Update button immediately
             updateSubmitButtonState();
 
-            // Navigate
+            // Clear the expiry timer since submission happened
+            if (windowTimerId) {
+                clearTimeout(windowTimerId);
+                windowTimerId = null;
+            }
+
+            // Navigate to the submit URL
             window.location.href = SUBMIT_URL;
+            return true;
         }
 
         function handleCheckClick(event) {
-            // Always allowed
+            // Always allowed – no restrictions
             window.location.href = CHECK_URL;
+        }
+
+        // ============================================================
+        // Modal event handlers
+        // ============================================================
+        function handleModalClose(event) {
+            event.preventDefault();
+            hideExpiredModal();
+            // Return focus to the submit button
+            btnSubmit.focus();
+        }
+
+        function handleOverlayClick(event) {
+            // Close only if the click target is the overlay itself (not the dialog)
+            if (event.target === modalOverlay) {
+                hideExpiredModal();
+                btnSubmit.focus();
+            }
+        }
+
+        function handleModalKeydown(event) {
+            if (event.key === 'Escape') {
+                hideExpiredModal();
+                btnSubmit.focus();
+            }
+            // Trap focus inside modal
+            if (event.key === 'Tab') {
+                const focusable = modalOverlay.querySelectorAll(
+                    'button, [tabindex]:not([tabindex="-1"])');
+                if (focusable.length === 0) return;
+                const first = focusable[0];
+                const last = focusable[focusable.length - 1];
+                if (event.shiftKey && document.activeElement === first) {
+                    event.preventDefault();
+                    last.focus();
+                } else if (!event.shiftKey && document.activeElement === last) {
+                    event.preventDefault();
+                    first.focus();
+                }
+            }
         }
 
         // ============================================================
         // Initialize the page
         // ============================================================
-        async function init() {
-            // 1. Set page open time and window expiration
-            pageOpenTime = Date.now();
-            windowExpireTime = pageOpenTime + WINDOW_MS;
+        function init() {
+            // 1. Load or create session
+            sessionData = loadOrCreateSession();
 
-            // 2. Disable submit button until IP check completes
-            btnSubmit.disabled = true;
-            btnSubmit.classList.add('loading');
-            submitExpiredHint.classList.remove('visible');
+            // 2. Update submit button state
+            updateSubmitButtonState();
 
-            // 3. Fetch public IP
-            playerIp = await fetchPublicIp();
-            if (!playerIp) {
-                ipFetchFailed = true;
-                console.error('[TicketSystem] Could not determine public IP. Submit disabled permanently.');
-                btnSubmit.classList.remove('loading');
-                updateSubmitButtonState(); // will show expired
-            } else {
-                console.log('[TicketSystem] Public IP:', playerIp);
-                ipFetchFailed = false;
-                // Load last submit time for this IP
-                lastSubmitTime = loadLastSubmitTime(playerIp);
-                btnSubmit.classList.remove('loading');
-                updateSubmitButtonState();
-            }
-
-            // 4. Schedule the 5‑minute window expiry
+            // 3. Schedule the 5‑minute auto‑expiry
             scheduleWindowExpiration();
 
-            // 5. Attach event listeners
+            // 4. Attach button listeners
             btnSubmit.addEventListener('click', handleSubmitClick);
             btnCheck.addEventListener('click', handleCheckClick);
 
-            // Prevent double‑tap zoom on mobile buttons
-            [btnSubmit, btnCheck].forEach(btn => {
-                btn.addEventListener('touchstart', () => {}, { passive: true });
+            // 5. Attach modal listeners
+            modalCloseBtn.addEventListener('click', handleModalClose);
+            modalOverlay.addEventListener('click', handleOverlayClick);
+            document.addEventListener('keydown', handleModalKeydown);
+
+            // 6. Prevent double‑tap zoom on mobile buttons
+            [btnSubmit, btnCheck].forEach(function(btn) {
+                btn.addEventListener('touchstart', function() {}, { passive: true });
             });
 
-            // Debug info
-            console.log('[TicketSystem] Page open:', new Date(pageOpenTime).toISOString());
-            console.log('[TicketSystem] Window expires:', new Date(windowExpireTime).toISOString());
-            console.log('[TicketSystem] IP:', playerIp || 'unknown');
-            console.log('[TicketSystem] Last submit:', lastSubmitTime ? new Date(lastSubmitTime).toISOString() : 'none');
+            // 7. Debug logging
+            console.log('[TicketSystem] Session code:', sessionData.code);
+            console.log('[TicketSystem] Created at:', new Date(sessionData.createdAt).toISOString());
+            console.log('[TicketSystem] Used:', sessionData.used);
+            console.log('[TicketSystem] Can submit:', canSubmit());
+            if (!sessionData.used) {
+                const remaining = Math.max(0, WINDOW_MS - (Date.now() - sessionData.createdAt));
+                console.log('[TicketSystem] Window remaining:',
+                    Math.floor(remaining / 60000) + 'm ' +
+                    Math.floor((remaining % 60000) / 1000) + 's');
+            }
         }
 
         // ============================================================
-        // Handle tab visibility changes (refresh state)
+        // Handle tab visibility changes
         // ============================================================
-        document.addEventListener('visibilitychange', () => {
-            if (!document.hidden && playerIp) {
-                // Re‑check expiration and update UI
+        document.addEventListener('visibilitychange', function() {
+            if (!document.hidden && sessionData) {
+                // Re‑check state when user returns
                 updateSubmitButtonState();
-                // If window has not expired yet, re‑schedule timer (in case it was cleared)
-                if (Date.now() < windowExpireTime && !windowTimerId) {
+                // Re‑schedule timer if still within window and not expired
+                if (canSubmit() && !windowTimerId) {
                     scheduleWindowExpiration();
+                }
+                if (!canSubmit() && windowTimerId) {
+                    clearTimeout(windowTimerId);
+                    windowTimerId = null;
                 }
             }
         });
@@ -669,7 +876,7 @@
         // ============================================================
         // Clean up on unload
         // ============================================================
-        window.addEventListener('beforeunload', () => {
+        window.addEventListener('beforeunload', function() {
             if (windowTimerId) {
                 clearTimeout(windowTimerId);
                 windowTimerId = null;
