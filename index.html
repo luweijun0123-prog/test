@@ -15,11 +15,9 @@
             --gray-50: #f8fafc;
             --gray-100: #f1f5f9;
             --gray-200: #e2e8f0;
-            --gray-300: #cbd5e1;
             --gray-400: #94a3b8;
             --gray-500: #64748b;
             --gray-600: #475569;
-            --gray-700: #334155;
             --gray-800: #1e293b;
             --white: #ffffff;
         }
@@ -30,7 +28,7 @@
         }
 
         body {
-            background: #f0f4f8;
+            background: #eef2f6;
             font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen', 'Ubuntu', 'Helvetica Neue', sans-serif;
             min-height: 100vh;
             min-height: 100dvh;
@@ -39,10 +37,9 @@
             justify-content: center;
             padding: 20px;
             -webkit-font-smoothing: antialiased;
-            -moz-osx-font-smoothing: grayscale;
             background-image:
-                radial-gradient(ellipse at 20% 0%, rgba(37, 99, 235, 0.04) 0%, transparent 50%),
-                radial-gradient(ellipse at 80% 100%, rgba(37, 99, 235, 0.03) 0%, transparent 50%);
+                radial-gradient(ellipse at 20% 0%, rgba(37, 99, 235, 0.06) 0%, transparent 50%),
+                radial-gradient(ellipse at 80% 100%, rgba(37, 99, 235, 0.04) 0%, transparent 50%);
         }
 
         /* Fixed‑size page wrapper (640×960) */
@@ -52,19 +49,19 @@
             height: 960px;
             max-height: 100vh;
             margin: 0 auto;
-            overflow: hidden;
-            border-radius: 18px;
-            box-shadow: 0 12px 40px rgba(0, 0, 0, 0.12);
+            border-radius: 20px;
+            box-shadow: 0 20px 50px rgba(0, 0, 0, 0.1), 0 0 0 1px rgba(0, 0, 0, 0.04);
             display: flex;
             flex-direction: column;
             background: #ffffff;
-            animation: fadeInUp 0.45s ease-out;
+            overflow: hidden;
+            animation: fadeInUp 0.5s ease-out;
         }
 
         @keyframes fadeInUp {
             from {
                 opacity: 0;
-                transform: translateY(16px);
+                transform: translateY(20px);
             }
             to {
                 opacity: 1;
@@ -74,81 +71,91 @@
 
         /* Header card */
         .header-card {
-            background: linear-gradient(135deg, #2563eb 0%, #1d4ed8 100%);
-            border-radius: 18px 18px 0 0;
-            padding: 24px 28px 20px;
+            background: linear-gradient(135deg, #1e3a8a 0%, #2563eb 100%);
+            border-radius: 20px 20px 0 0;
+            padding: 28px 32px 24px;
             color: #ffffff;
             position: relative;
             overflow: hidden;
             flex-shrink: 0;
-            box-shadow: 0 4px 20px rgba(37, 99, 235, 0.15);
+            box-shadow: 0 6px 24px rgba(37, 99, 235, 0.25);
+            z-index: 2;
         }
 
+        /* Decorative game elements */
         .header-card::after {
             content: '';
             position: absolute;
-            top: -50px;
-            right: -50px;
-            width: 140px;
-            height: 140px;
-            background: rgba(255, 255, 255, 0.06);
+            top: -60px;
+            right: -30px;
+            width: 160px;
+            height: 160px;
+            background: rgba(255, 255, 255, 0.05);
             border-radius: 50%;
             pointer-events: none;
         }
-
         .header-card::before {
             content: '';
             position: absolute;
-            bottom: -30px;
-            left: -30px;
-            width: 100px;
-            height: 100px;
+            bottom: -40px;
+            left: -40px;
+            width: 120px;
+            height: 120px;
             background: rgba(255, 255, 255, 0.04);
             border-radius: 50%;
             pointer-events: none;
         }
 
         .header-icon-circle {
-            width: 48px;
-            height: 48px;
-            border-radius: 14px;
-            background: rgba(255, 255, 255, 0.18);
+            width: 52px;
+            height: 52px;
+            border-radius: 16px;
+            background: rgba(255, 255, 255, 0.15);
+            backdrop-filter: blur(6px);
             display: flex;
             align-items: center;
             justify-content: center;
-            font-size: 24px;
+            font-size: 26px;
             flex-shrink: 0;
-            backdrop-filter: blur(4px);
+            border: 1px solid rgba(255, 255, 255, 0.15);
         }
 
-        /* Content card (scrollable if needed) */
+        /* Content card */
         .content-card {
             flex: 1;
             overflow-y: auto;
             background: #ffffff;
-            border-radius: 0 0 18px 18px;
+            border-radius: 0 0 20px 20px;
             padding: 24px 28px 28px;
-            border: 1px solid #e8ecf1;
-            border-top: none;
+            scrollbar-width: thin;
+            scrollbar-color: #cbd5e1 transparent;
+        }
+        .content-card::-webkit-scrollbar {
+            width: 5px;
+        }
+        .content-card::-webkit-scrollbar-track {
+            background: transparent;
+        }
+        .content-card::-webkit-scrollbar-thumb {
+            background: #cbd5e1;
+            border-radius: 10px;
         }
 
-        /* Function card inside content */
+        /* Function card */
         .func-card {
             background: #ffffff;
             border: 1px solid #e8ecf1;
             border-radius: 16px;
-            padding: 22px 20px;
-            transition: all 0.2s ease;
+            padding: 20px 20px 16px;
+            transition: all 0.25s ease;
             position: relative;
         }
-
         .func-card:first-child {
-            margin-bottom: 16px;
+            margin-bottom: 18px;
         }
-
         .func-card:hover {
             border-color: #d0d7e2;
-            box-shadow: 0 6px 20px rgba(0, 0, 0, 0.05);
+            box-shadow: 0 8px 24px rgba(0, 0, 0, 0.04);
         }
 
         .func-icon {
@@ -161,61 +168,58 @@
             flex-shrink: 0;
             font-size: 20px;
         }
-
         .func-icon.submit {
             background: #fef2f2;
             color: #ef4444;
         }
-
         .func-icon.check {
             background: #eff6ff;
             color: #2563eb;
         }
 
-        /* Submit button - red */
+        /* Submit button - red (game style) */
         .btn-submit {
             display: inline-flex;
             align-items: center;
             justify-content: center;
             gap: 10px;
             width: 100%;
-            padding: 16px 24px;
+            padding: 14px 24px;
             font-size: 17px;
-            font-weight: 600;
-            letter-spacing: 0.2px;
+            font-weight: 700;
+            letter-spacing: 0.3px;
             border-radius: 14px;
             border: none;
             cursor: pointer;
             transition: all 0.25s ease;
             color: #ffffff;
-            background: #ef4444;
-            min-height: 54px;
+            background: linear-gradient(180deg, #ef4444 0%, #dc2626 100%);
+            min-height: 52px;
             text-decoration: none;
             -webkit-user-select: none;
             user-select: none;
             outline: none;
             position: relative;
             overflow: hidden;
-            box-shadow: 0 4px 12px rgba(239, 68, 68, 0.25);
+            box-shadow: 0 4px 14px rgba(220, 38, 38, 0.3), 0 1px 2px rgba(255, 255, 255, 0.15) inset;
+            text-shadow: 0 1px 1px rgba(0, 0, 0, 0.2);
         }
-
         .btn-submit:hover:not(:disabled) {
-            background: #dc2626;
-            box-shadow: 0 6px 20px rgba(220, 38, 38, 0.35);
+            background: linear-gradient(180deg, #f87171 0%, #dc2626 100%);
+            box-shadow: 0 6px 20px rgba(220, 38, 38, 0.45), 0 1px 2px rgba(255, 255, 255, 0.2) inset;
             transform: translateY(-1px);
         }
-
         .btn-submit:active:not(:disabled) {
             transform: scale(0.975);
-            box-shadow: 0 2px 6px rgba(239, 68, 68, 0.2);
+            box-shadow: 0 2px 8px rgba(220, 38, 38, 0.3);
             transition: all 0.08s ease;
         }
-
         .btn-submit:disabled {
             background: #d1d5db;
             color: #9ca3af;
             cursor: not-allowed;
             box-shadow: none;
+            text-shadow: none;
             pointer-events: none;
             border: 1px solid #e5e7eb;
         }
@@ -227,35 +231,34 @@
             justify-content: center;
             gap: 10px;
             width: 100%;
-            padding: 16px 24px;
+            padding: 14px 24px;
             font-size: 17px;
-            font-weight: 600;
-            letter-spacing: 0.2px;
+            font-weight: 700;
+            letter-spacing: 0.3px;
             border-radius: 14px;
             border: none;
             cursor: pointer;
             transition: all 0.25s ease;
             color: #ffffff;
-            background: #2563eb;
-            min-height: 54px;
+            background: linear-gradient(180deg, #3b82f6 0%, #2563eb 100%);
+            min-height: 52px;
             text-decoration: none;
             -webkit-user-select: none;
             user-select: none;
             outline: none;
             position: relative;
             overflow: hidden;
-            box-shadow: 0 4px 12px rgba(37, 99, 235, 0.25);
+            box-shadow: 0 4px 14px rgba(37, 99, 235, 0.3), 0 1px 2px rgba(255, 255, 255, 0.2) inset;
+            text-shadow: 0 1px 1px rgba(0, 0, 0, 0.15);
         }
-
         .btn-check:hover {
-            background: #1d4ed8;
-            box-shadow: 0 6px 20px rgba(29, 78, 216, 0.35);
+            background: linear-gradient(180deg, #60a5fa 0%, #2563eb 100%);
+            box-shadow: 0 6px 20px rgba(37, 99, 235, 0.45), 0 1px 2px rgba(255, 255, 255, 0.25) inset;
             transform: translateY(-1px);
         }
-
         .btn-check:active {
             transform: scale(0.975);
-            box-shadow: 0 2px 6px rgba(37, 99, 235, 0.2);
+            box-shadow: 0 2px 8px rgba(37, 99, 235, 0.3);
             transition: all 0.08s ease;
         }
 
@@ -264,17 +267,15 @@
             display: none;
             align-items: center;
             gap: 6px;
-            margin-top: 12px;
+            margin-top: 10px;
             font-size: 14px;
             font-weight: 600;
             color: #ef4444;
             letter-spacing: 0.2px;
         }
-
         .expired-hint.visible {
             display: flex;
         }
-
         .expired-dot {
             width: 8px;
             height: 8px;
@@ -283,7 +284,6 @@
             flex-shrink: 0;
             animation: blinkRed 1.2s ease-in-out infinite;
         }
-
         @keyframes blinkRed {
             0%,
             100% {
@@ -294,41 +294,44 @@
             }
         }
 
-        /* Active indicator */
-        .active-indicator {
-            display: flex;
-            align-items: center;
-            gap: 6px;
-            margin-top: 12px;
-            font-size: 13px;
-            font-weight: 500;
-            color: #22c55e;
-            letter-spacing: 0.2px;
-        }
-
-        .active-indicator.hidden {
+        /* Loading state for submit button */
+        .btn-submit .loading-text {
             display: none;
         }
-
-        .active-dot {
-            width: 7px;
-            height: 7px;
-            border-radius: 50%;
-            background: #22c55e;
-            flex-shrink: 0;
-            box-shadow: 0 0 6px rgba(34, 197, 94, 0.5);
+        .btn-submit.loading .default-text {
+            display: none;
+        }
+        .btn-submit.loading .loading-text {
+            display: inline;
         }
 
-        /* Scrollbar styling for content card */
-        .content-card::-webkit-scrollbar {
-            width: 5px;
-        }
-        .content-card::-webkit-scrollbar-track {
-            background: transparent;
-        }
-        .content-card::-webkit-scrollbar-thumb {
-            background: #cbd5e1;
-            border-radius: 10px;
+        /* Responsive adjustments for small screens */
+        @media (max-width: 680px) {
+            .page-wrapper {
+                width: 100%;
+                height: auto;
+                min-height: 100vh;
+                border-radius: 0;
+                box-shadow: none;
+            }
+            .header-card {
+                border-radius: 0;
+                padding: 20px 20px 18px;
+            }
+            .content-card {
+                border-radius: 0;
+                padding: 16px;
+            }
+            .func-card {
+                padding: 16px 14px 14px;
+            }
+            .btn-submit,
+            .btn-check {
+                padding: 12px 16px;
+                font-size: 16px;
+                min-height: 48px;
+                border-radius: 12px;
+            }
         }
     </style>
 </head>
@@ -340,17 +343,17 @@
         <div class="header-card">
             <div style="display:flex;align-items:center;gap:14px;position:relative;z-index:1;">
                 <div class="header-icon-circle" aria-hidden="true">
-                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+                    <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
                         <circle cx="12" cy="12" r="10"/>
                         <path d="M12 6v6l4 2"/>
                     </svg>
                 </div>
                 <div>
-                    <h1 style="font-size:21px;font-weight:700;color:#ffffff;margin:0;line-height:1.3;letter-spacing:0.2px;">
+                    <h1 style="font-size:22px;font-weight:700;color:#ffffff;margin:0;line-height:1.3;letter-spacing:0.2px;">
                         Tomb Busters Ticket System
                     </h1>
-                    <p style="font-size:13px;color:rgba(255,255,255,0.85);margin:4px 0 0;letter-spacing:0.15px;">
-                        Submit or check your support tickets
+                    <p style="font-size:13px;color:rgba(255,255,255,0.8);margin:4px 0 0;letter-spacing:0.2px;">
+                        Player support center
                     </p>
                 </div>
             </div>
@@ -360,40 +363,40 @@
         <div class="content-card">
 
             <!-- Submit Ticket Card -->
-            <div class="func-card" aria-labelledby="submit-title">
+            <div class="func-card">
                 <div style="display:flex;align-items:center;gap:12px;margin-bottom:14px;">
                     <div class="func-icon submit" aria-hidden="true">
                         <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
                             <path d="M12 5v14M5 12h14"/>
                         </svg>
                     </div>
-                    <span id="submit-title" style="font-size:16px;font-weight:600;color:#1e293b;letter-spacing:0.15px;">
+                    <span style="font-size:16px;font-weight:600;color:#1e293b;letter-spacing:0.2px;">
                         Submit a Ticket
                     </span>
                 </div>
+
                 <button
                 id="btnSubmit"
                 class="btn-submit"
                 aria-label="Submit a new support ticket"
                 title="Submit Ticket"
+                disabled
             >
             <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
                 <path d="M12 5v14M5 12h14"/>
             </svg>
-            Submit Ticket
+            <span class="default-text">Submit Ticket</span>
+            <span class="loading-text">Loading...</span>
         </button>
-        <!-- Active indicator (hidden when expired) -->
-        <div id="activeIndicator" class="active-indicator" aria-live="polite">
-            <span class="active-dot"></span> Active
-        </div>
-        <!-- Expired hint (visible only when expired) -->
-        <div id="expiredHint" class="expired-hint" aria-live="assertive">
+
+        <!-- Expired hint (visible when disabled) -->
+        <div id="submitExpiredHint" class="expired-hint" aria-live="assertive">
             <span class="expired-dot"></span> Link expired
         </div>
     </div>
 
     <!-- Check Ticket Card -->
-    <div class="func-card" aria-labelledby="check-title">
+    <div class="func-card">
         <div style="display:flex;align-items:center;gap:12px;margin-bottom:14px;">
             <div class="func-icon check" aria-hidden="true">
                 <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
@@ -401,10 +404,11 @@
                     <path d="M21 21l-4.35-4.35"/>
                 </svg>
             </div>
-            <span id="check-title" style="font-size:16px;font-weight:600;color:#1e293b;letter-spacing:0.15px;">
+            <span style="font-size:16px;font-weight:600;color:#1e293b;letter-spacing:0.2px;">
                 Check Ticket Status
             </span>
         </div>
+
         <button
         id="btnCheck"
         class="btn-check"
@@ -420,7 +424,6 @@
 </div>
 
 </div>
-
 </main>
 
 <script>
@@ -432,25 +435,27 @@
             'https://giantnetwork.qiyukf.com/worksheet/page/plugin/submit?pluginId=a105e6dee58a4b77868640c1418f704&type=1';
         const CHECK_URL =
             'https://giantnetwork.qiyukf.com/worksheet/page/plugin/list?pluginId=a105e6dee58a4b77868640c1418f704&type=1';
-        const ONE_HOUR_MS = 60 * 60 * 1000; // 1 hour in milliseconds
-        const STORAGE_KEY = 'tomb_busters_ticket_open_time_v1';
+        const WINDOW_MINUTES = 5; // 5-minute submission window
+        const WINDOW_MS = WINDOW_MINUTES * 60 * 1000;
+        const IP_API_URL = 'https://api.ipify.org?format=json';
+        const STORAGE_PREFIX = 'tomb_ticket_';
 
         // ============================================================
-        // DOM Element References
+        // DOM Elements
         // ============================================================
         const btnSubmit = document.getElementById('btnSubmit');
         const btnCheck = document.getElementById('btnCheck');
-        const activeIndicator = document.getElementById('activeIndicator');
-        const expiredHint = document.getElementById('expiredHint');
+        const submitExpiredHint = document.getElementById('submitExpiredHint');
 
         // ============================================================
         // State
         // ============================================================
-        let openTime = null;
-        let expireTime = null;
-        let isExpired = false;
-        let expireTimeoutId = null;
-        let storageAvailable = true;
+        let playerIp = null;
+        let pageOpenTime = null; // When the page was opened
+        let windowExpireTime = null; // pageOpenTime + 5 minutes
+        let lastSubmitTime = null; // Timestamp of last submit from storage (for this IP)
+        let ipFetchFailed = false;
+        let windowTimerId = null;
 
         // ============================================================
         // Safe localStorage helpers
@@ -459,7 +464,6 @@
             try {
                 return localStorage.getItem(key);
             } catch (e) {
-                storageAvailable = false;
                 return null;
             }
         }
@@ -469,174 +473,212 @@
                 localStorage.setItem(key, value);
                 return true;
             } catch (e) {
-                storageAvailable = false;
                 return false;
             }
         }
 
-        function safeRemoveItem(key) {
+        // ============================================================
+        // Fetch public IP address
+        // ============================================================
+        async function fetchPublicIp() {
             try {
-                localStorage.removeItem(key);
-                return true;
+                const response = await fetch(IP_API_URL);
+                if (!response.ok) throw new Error('IP fetch failed');
+                const data = await response.json();
+                return data.ip || null;
             } catch (e) {
-                storageAvailable = false;
-                return false;
+                console.warn('[TicketSystem] IP fetch error:', e);
+                return null;
             }
         }
 
         // ============================================================
-        // Initialize open time from storage or create new
+        // Load last submit time for given IP from storage
         // ============================================================
-        function initializeOpenTime() {
-            const stored = safeGetItem(STORAGE_KEY);
+        function loadLastSubmitTime(ip) {
+            const key = STORAGE_PREFIX + 'submit_ts_' + ip;
+            const stored = safeGetItem(key);
             if (stored) {
-                const parsed = parseInt(stored, 10);
-                if (!isNaN(parsed) && parsed > 0) {
-                    if (Date.now() - parsed < ONE_HOUR_MS) {
-                        openTime = parsed;
-                    } else {
-                        openTime = parsed;
-                    }
-                } else {
-                    openTime = Date.now();
-                    safeSetItem(STORAGE_KEY, openTime.toString());
+                const timestamp = parseInt(stored, 10);
+                if (!isNaN(timestamp) && timestamp > 0) {
+                    return timestamp;
                 }
-            } else {
-                openTime = Date.now();
-                safeSetItem(STORAGE_KEY, openTime.toString());
             }
-            expireTime = openTime + ONE_HOUR_MS;
-            isExpired = Date.now() >= expireTime;
+            return null;
         }
 
         // ============================================================
-        // Update UI based on expiration state
+        // Save submit time for current IP
         // ============================================================
-        function updateExpiredState() {
+        function saveSubmitTime(ip, timestamp) {
+            const key = STORAGE_PREFIX + 'submit_ts_' + ip;
+            safeSetItem(key, timestamp.toString());
+        }
+
+        // ============================================================
+        // Check if submit is currently allowed
+        // ============================================================
+        function canSubmit() {
+            if (!playerIp || ipFetchFailed) return false;
             const now = Date.now();
-            isExpired = now >= expireTime;
 
-            if (isExpired) {
-                btnSubmit.disabled = true;
-                btnSubmit.setAttribute('aria-disabled', 'true');
-                btnSubmit.title = 'This link has expired';
-                expiredHint.classList.add('visible');
-                activeIndicator.classList.add('hidden');
-                if (expireTimeoutId) {
-                    clearTimeout(expireTimeoutId);
-                    expireTimeoutId = null;
-                }
-            } else {
-                btnSubmit.disabled = false;
-                btnSubmit.setAttribute('aria-disabled', 'false');
-                btnSubmit.title = 'Submit a new support ticket';
-                activeIndicator.classList.remove('hidden');
-                expiredHint.classList.remove('visible');
-                scheduleExpirationCheck();
-            }
-        }
+            // Window check: must be within the 5-minute page‑open window
+            if (now >= windowExpireTime) return false;
 
-        // ============================================================
-        // Schedule a timeout to update UI exactly when expiration occurs
-        // ============================================================
-        function scheduleExpirationCheck() {
-            if (expireTimeoutId) {
-                clearTimeout(expireTimeoutId);
-                expireTimeoutId = null;
-            }
-            if (isExpired) return;
-            const remaining = expireTime - Date.now();
-            if (remaining <= 0) {
-                updateExpiredState();
-                return;
-            }
-            expireTimeoutId = setTimeout(function() {
-                expireTimeoutId = null;
-                updateExpiredState();
-            }, remaining + 100);
-        }
+            // IP repetition check: no submit yet OR last submit was ≥5 min ago
+            if (lastSubmitTime && (now - lastSubmitTime < WINDOW_MS)) return false;
 
-        // ============================================================
-        // Button Click Handlers
-        // ============================================================
-        function handleSubmitClick(event) {
-            if (Date.now() >= expireTime) {
-                event.preventDefault();
-                isExpired = true;
-                updateExpiredState();
-                btnSubmit.style.transform = 'scale(0.95)';
-                setTimeout(function() {
-                    btnSubmit.style.transform = '';
-                }, 150);
-                return false;
-            }
-            window.location.href = SUBMIT_URL;
             return true;
         }
 
+        // ============================================================
+        // Update the submit button UI to reflect the current state
+        // ============================================================
+        function updateSubmitButtonState() {
+            const allowed = canSubmit();
+
+            if (allowed) {
+                btnSubmit.disabled = false;
+                btnSubmit.classList.remove('loading');
+                btnSubmit.setAttribute('aria-disabled', 'false');
+                btnSubmit.title = 'Submit a new ticket';
+                submitExpiredHint.classList.remove('visible');
+            } else {
+                btnSubmit.disabled = true;
+                btnSubmit.classList.remove('loading');
+                btnSubmit.setAttribute('aria-disabled', 'true');
+                btnSubmit.title = 'Submission unavailable';
+                submitExpiredHint.classList.add('visible');
+            }
+        }
+
+        // ============================================================
+        // Handle the 5‑minute window expiration
+        // ============================================================
+        function onWindowExpire() {
+            // Called when the 5‑minute timer fires
+            windowTimerId = null;
+            updateSubmitButtonState();
+            console.log('[TicketSystem] Submission window expired.');
+        }
+
+        function scheduleWindowExpiration() {
+            if (windowTimerId) clearTimeout(windowTimerId);
+            const remaining = windowExpireTime - Date.now();
+            if (remaining <= 0) {
+                onWindowExpire();
+            } else {
+                windowTimerId = setTimeout(onWindowExpire, remaining + 50); // +50ms buffer
+            }
+        }
+
+        // ============================================================
+        // Button click handlers
+        // ============================================================
+        function handleSubmitClick(event) {
+            event.preventDefault();
+
+            // Re‑evaluate in real time
+            if (!canSubmit()) {
+                updateSubmitButtonState();
+                // Brief visual shake
+                btnSubmit.style.transform = 'scale(0.95)';
+                setTimeout(() => { btnSubmit.style.transform = ''; }, 120);
+                return false;
+            }
+
+            // Record the submission timestamp
+            const now = Date.now();
+            saveSubmitTime(playerIp, now);
+            lastSubmitTime = now; // Update local variable
+
+            // Update UI (button will likely become disabled)
+            updateSubmitButtonState();
+
+            // Navigate
+            window.location.href = SUBMIT_URL;
+        }
+
         function handleCheckClick(event) {
+            // Always allowed
             window.location.href = CHECK_URL;
         }
 
         // ============================================================
-        // Reset timer (exposed for debugging via console)
+        // Initialize the page
         // ============================================================
-        function resetTimer() {
-            safeRemoveItem(STORAGE_KEY);
-            openTime = Date.now();
-            expireTime = openTime + ONE_HOUR_MS;
-            isExpired = false;
-            safeSetItem(STORAGE_KEY, openTime.toString());
-            updateExpiredState();
-            scheduleExpirationCheck();
-        }
-        window.__resetTicketTimer = resetTimer;
+        async function init() {
+            // 1. Set page open time and window expiration
+            pageOpenTime = Date.now();
+            windowExpireTime = pageOpenTime + WINDOW_MS;
 
-        // ============================================================
-        // Initialize Everything
-        // ============================================================
-        function init() {
-            initializeOpenTime();
-            updateExpiredState();
-            scheduleExpirationCheck();
+            // 2. Disable submit button until IP check completes
+            btnSubmit.disabled = true;
+            btnSubmit.classList.add('loading');
+            submitExpiredHint.classList.remove('visible');
 
+            // 3. Fetch public IP
+            playerIp = await fetchPublicIp();
+            if (!playerIp) {
+                ipFetchFailed = true;
+                console.error('[TicketSystem] Could not determine public IP. Submit disabled permanently.');
+                btnSubmit.classList.remove('loading');
+                updateSubmitButtonState(); // will show expired
+            } else {
+                console.log('[TicketSystem] Public IP:', playerIp);
+                ipFetchFailed = false;
+                // Load last submit time for this IP
+                lastSubmitTime = loadLastSubmitTime(playerIp);
+                btnSubmit.classList.remove('loading');
+                updateSubmitButtonState();
+            }
+
+            // 4. Schedule the 5‑minute window expiry
+            scheduleWindowExpiration();
+
+            // 5. Attach event listeners
             btnSubmit.addEventListener('click', handleSubmitClick);
             btnCheck.addEventListener('click', handleCheckClick);
 
-            [btnSubmit, btnCheck].forEach(function(btn) {
-                btn.addEventListener('touchstart', function(e) {}, { passive: true });
+            // Prevent double‑tap zoom on mobile buttons
+            [btnSubmit, btnCheck].forEach(btn => {
+                btn.addEventListener('touchstart', () => {}, { passive: true });
             });
 
-            console.log('[TombBustersTicket] Initialized.');
-            console.log('[TombBustersTicket] Open time:', new Date(openTime).toISOString());
-            console.log('[TombBustersTicket] Expire time:', new Date(expireTime).toISOString());
-            console.log('[TombBustersTicket] Expired:', isExpired);
-            if (!isExpired) {
-                const remainingSec = Math.max(0, Math.floor((expireTime - Date.now()) / 1000));
-                console.log('[TombBustersTicket] Submit link expires in',
-                    Math.floor(remainingSec / 60) + 'm ' + (remainingSec % 60) + 's');
-            } else {
-                console.log('[TombBustersTicket] Submit link has EXPIRED.');
-            }
+            // Debug info
+            console.log('[TicketSystem] Page open:', new Date(pageOpenTime).toISOString());
+            console.log('[TicketSystem] Window expires:', new Date(windowExpireTime).toISOString());
+            console.log('[TicketSystem] IP:', playerIp || 'unknown');
+            console.log('[TicketSystem] Last submit:', lastSubmitTime ? new Date(lastSubmitTime).toISOString() : 'none');
         }
 
-        document.addEventListener('visibilitychange', function() {
-            if (!document.hidden) {
-                const now = Date.now();
-                if ((now >= expireTime) !== isExpired) {
-                    updateExpiredState();
-                    if (!isExpired) scheduleExpirationCheck();
+        // ============================================================
+        // Handle tab visibility changes (refresh state)
+        // ============================================================
+        document.addEventListener('visibilitychange', () => {
+            if (!document.hidden && playerIp) {
+                // Re‑check expiration and update UI
+                updateSubmitButtonState();
+                // If window has not expired yet, re‑schedule timer (in case it was cleared)
+                if (Date.now() < windowExpireTime && !windowTimerId) {
+                    scheduleWindowExpiration();
                 }
             }
         });
 
-        window.addEventListener('beforeunload', function() {
-            if (expireTimeoutId) {
-                clearTimeout(expireTimeoutId);
-                expireTimeoutId = null;
+        // ============================================================
+        // Clean up on unload
+        // ============================================================
+        window.addEventListener('beforeunload', () => {
+            if (windowTimerId) {
+                clearTimeout(windowTimerId);
+                windowTimerId = null;
             }
         });
 
+        // ============================================================
+        // Start when DOM is ready
+        // ============================================================
         if (document.readyState === 'loading') {
             document.addEventListener('DOMContentLoaded', init);
         } else {
