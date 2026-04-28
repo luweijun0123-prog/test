@@ -14,9 +14,6 @@
             --blue-600: #2563eb;
             --blue-700: #1d4ed8;
             --blue-800: #1e40af;
-            --red-500: #ef4444;
-            --red-600: #dc2626;
-            --red-700: #b91c1c;
             --gray-50: #f8fafc;
             --gray-100: #f1f5f9;
             --gray-200: #e2e8f0;
@@ -27,6 +24,8 @@
             --gray-700: #374151;
             --gray-800: #1f2937;
             --white: #ffffff;
+            --red-500: #ef4444;
+            --red-600: #dc2626;
         }
 
         * {
@@ -44,14 +43,11 @@
             justify-content: center;
             padding: 16px;
             -webkit-font-smoothing: antialiased;
-            -moz-osx-font-smoothing: grayscale;
-            background-image:
-                radial-gradient(ellipse at 15% 0%, rgba(37, 99, 235, 0.06) 0%, transparent 55%),
-                radial-gradient(ellipse at 85% 100%, rgba(37, 99, 235, 0.04) 0%, transparent 55%),
-                radial-gradient(ellipse at 50% 50%, rgba(59, 130, 246, 0.03) 0%, transparent 70%);
+            background-image: radial-gradient(ellipse at 20% 0%, rgba(37, 99, 235, 0.05) 0%, transparent 50%),
+                radial-gradient(ellipse at 80% 100%, rgba(37, 99, 235, 0.04) 0%, transparent 50%);
         }
 
-        /* Fixed‑size page wrapper: 640×960, centered */
+        /* Fixed size page wrapper */
         .page-wrapper {
             width: 640px;
             max-width: 100%;
@@ -59,9 +55,7 @@
             max-height: 100vh;
             margin: 0 auto;
             border-radius: 20px;
-            box-shadow:
-                0 24px 56px rgba(0, 0, 0, 0.10),
-                0 0 0 1px rgba(0, 0, 0, 0.04);
+            box-shadow: 0 24px 56px rgba(0, 0, 0, 0.10), 0 0 0 1px rgba(0, 0, 0, 0.04);
             display: flex;
             flex-direction: column;
             background: #ffffff;
@@ -94,7 +88,6 @@
             z-index: 2;
         }
 
-        /* Decorative game‑style glow orbs */
         .header-card::after {
             content: '';
             position: absolute;
@@ -116,30 +109,6 @@
             background: radial-gradient(circle, rgba(255, 255, 255, 0.05) 0%, transparent 70%);
             border-radius: 50%;
             pointer-events: none;
-        }
-
-        /* Small floating diamond decoration */
-        .header-decor {
-            position: absolute;
-            top: 14px;
-            right: 20px;
-            width: 22px;
-            height: 22px;
-            background: rgba(255, 255, 255, 0.12);
-            transform: rotate(45deg);
-            border-radius: 3px;
-            pointer-events: none;
-            animation: floatDiamond 4s ease-in-out infinite;
-            z-index: 1;
-        }
-        @keyframes floatDiamond {
-            0%,
-            100% {
-                transform: rotate(45deg) translateY(0);
-            }
-            50% {
-                transform: rotate(45deg) translateY(-8px);
-            }
         }
 
         .header-icon-circle {
@@ -178,139 +147,163 @@
             border-radius: 20px;
         }
 
-        /* Function card */
-        .func-card {
+        /* Collapsible panel */
+        .collapsible {
             background: #ffffff;
             border: 1px solid #e5e7eb;
             border-radius: 16px;
-            padding: 20px 20px 16px;
+            margin-bottom: 16px;
+            overflow: hidden;
             transition: all 0.3s ease;
-            position: relative;
         }
-        .func-card:first-child {
-            margin-bottom: 18px;
-        }
-        .func-card:hover {
-            border-color: #c7d2fe;
-            box-shadow: 0 8px 28px rgba(37, 99, 235, 0.06);
-        }
-
-        /* Icon circles */
-        .func-icon {
-            width: 44px;
-            height: 44px;
-            border-radius: 13px;
+        .collapsible-header {
             display: flex;
             align-items: center;
-            justify-content: center;
-            flex-shrink: 0;
-        }
-        .func-icon.icon-submit {
-            background: #fef2f2;
-            color: #ef4444;
-            box-shadow: 0 2px 8px rgba(239, 68, 68, 0.12);
-        }
-        .func-icon.icon-check {
-            background: #eff6ff;
-            color: #2563eb;
-            box-shadow: 0 2px 8px rgba(37, 99, 235, 0.12);
-        }
-
-        /* Submit button – red gradient */
-        .btn-submit {
-            display: inline-flex;
-            align-items: center;
-            justify-content: center;
-            gap: 9px;
-            width: 100%;
-            padding: 14px 24px;
-            font-size: 17px;
-            font-weight: 700;
-            letter-spacing: 0.25px;
-            border-radius: 14px;
-            border: none;
+            justify-content: space-between;
+            padding: 16px 20px;
             cursor: pointer;
-            transition: all 0.28s cubic-bezier(0.4, 0, 0.2, 1);
-            color: #ffffff;
-            background: linear-gradient(180deg, #ef4444 0%, #dc2626 100%);
-            min-height: 52px;
-            text-decoration: none;
             -webkit-user-select: none;
             user-select: none;
-            outline: none;
-            position: relative;
+            font-weight: 600;
+            font-size: 16px;
+            color: #1f2937;
+            letter-spacing: 0.15px;
+            transition: background 0.2s;
+        }
+        .collapsible-header:hover {
+            background: #f9fafb;
+        }
+        .collapsible-header .arrow {
+            width: 20px;
+            height: 20px;
+            transition: transform 0.25s ease;
+            color: #6b7280;
+        }
+        .collapsible.open .collapsible-header .arrow {
+            transform: rotate(180deg);
+        }
+        .collapsible-body {
+            max-height: 0;
             overflow: hidden;
-            box-shadow:
-                0 4px 16px rgba(220, 38, 38, 0.28),
-                0 1px 2px rgba(255, 255, 255, 0.12) inset;
-            text-shadow: 0 1px 1px rgba(0, 0, 0, 0.18);
+            transition: max-height 0.35s ease;
+            padding: 0 20px;
+            background: #f9fafb;
         }
-        .btn-submit:hover:not(:disabled) {
-            background: linear-gradient(180deg, #f87171 0%, #dc2626 100%);
-            box-shadow:
-                0 7px 24px rgba(220, 38, 38, 0.40),
-                0 1px 3px rgba(255, 255, 255, 0.18) inset;
-            transform: translateY(-2px);
-        }
-        .btn-submit:active:not(:disabled) {
-            transform: scale(0.97);
-            box-shadow:
-                0 2px 8px rgba(220, 38, 38, 0.25),
-                0 0px 1px rgba(255, 255, 255, 0.08) inset;
-            transition: all 0.06s ease;
-        }
-        .btn-submit:disabled {
-            background: #d1d5db;
-            color: #9ca3af;
-            cursor: not-allowed;
-            box-shadow: none;
-            text-shadow: none;
-            pointer-events: auto;
-            border: 1px solid #e5e7eb;
+        .collapsible.open .collapsible-body {
+            max-height: 200px;
+            padding: 16px 20px;
         }
 
-        /* Check button – blue gradient */
-        .btn-check {
-            display: inline-flex;
+        /* Radio button custom style */
+        .radio-label {
+            display: flex;
             align-items: center;
-            justify-content: center;
-            gap: 9px;
-            width: 100%;
-            padding: 14px 24px;
-            font-size: 17px;
+            gap: 10px;
+            padding: 10px 14px;
+            margin-bottom: 8px;
+            border-radius: 12px;
+            cursor: pointer;
+            font-size: 15px;
+            font-weight: 500;
+            color: #374151;
+            transition: all 0.2s ease;
+            border: 1px solid transparent;
+        }
+        .radio-label:hover {
+            background: #eff6ff;
+            border-color: #bfdbfe;
+        }
+        .radio-label input[type="radio"] {
+            appearance: none;
+            -webkit-appearance: none;
+            width: 20px;
+            height: 20px;
+            border: 2px solid #cbd5e1;
+            border-radius: 50%;
+            margin: 0;
+            display: grid;
+            place-content: center;
+            flex-shrink: 0;
+            transition: all 0.2s;
+            background: #ffffff;
+        }
+        .radio-label input[type="radio"]::before {
+            content: '';
+            width: 10px;
+            height: 10px;
+            border-radius: 50%;
+            transform: scale(0);
+            transition: 0.15s transform ease;
+            background: #2563eb;
+        }
+        .radio-label input[type="radio"]:checked {
+            border-color: #2563eb;
+            background: #eff6ff;
+        }
+        .radio-label input[type="radio"]:checked::before {
+            transform: scale(1);
+        }
+        .radio-label.selected {
+            background: #eff6ff;
+            border-color: #bfdbfe;
+        }
+
+        /* Buttons */
+        .btn-generate {
+            flex: 1;
+            padding: 14px 20px;
+            font-size: 16px;
             font-weight: 700;
             letter-spacing: 0.25px;
             border-radius: 14px;
             border: none;
             cursor: pointer;
-            transition: all 0.28s cubic-bezier(0.4, 0, 0.2, 1);
+            transition: all 0.28s ease;
             color: #ffffff;
             background: linear-gradient(180deg, #3b82f6 0%, #2563eb 100%);
             min-height: 52px;
-            text-decoration: none;
-            -webkit-user-select: none;
-            user-select: none;
-            outline: none;
-            position: relative;
-            overflow: hidden;
-            box-shadow:
-                0 4px 16px rgba(37, 99, 235, 0.28),
-                0 1px 2px rgba(255, 255, 255, 0.15) inset;
+            box-shadow: 0 4px 16px rgba(37, 99, 235, 0.28), 0 1px 2px rgba(255, 255, 255, 0.15) inset;
             text-shadow: 0 1px 1px rgba(0, 0, 0, 0.12);
         }
-        .btn-check:hover {
+        .btn-generate:hover {
             background: linear-gradient(180deg, #60a5fa 0%, #2563eb 100%);
-            box-shadow:
-                0 7px 24px rgba(37, 99, 235, 0.40),
-                0 1px 3px rgba(255, 255, 255, 0.22) inset;
+            box-shadow: 0 7px 24px rgba(37, 99, 235, 0.40), 0 1px 3px rgba(255, 255, 255, 0.22) inset;
+            transform: translateY(-2px);
+        }
+        .btn-generate:active {
+            transform: scale(0.97);
+        }
+
+        .btn-check {
+            flex: 1;
+            padding: 14px 20px;
+            font-size: 16px;
+            font-weight: 700;
+            letter-spacing: 0.25px;
+            border-radius: 14px;
+            border: 1px solid #2563eb;
+            cursor: pointer;
+            transition: all 0.28s ease;
+            color: #2563eb;
+            background: #ffffff;
+            min-height: 52px;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.04);
+        }
+        .btn-check:hover {
+            background: #eff6ff;
+            border-color: #1d4ed8;
+            color: #1d4ed8;
+            box-shadow: 0 6px 18px rgba(37, 99, 235, 0.12);
             transform: translateY(-2px);
         }
         .btn-check:active {
             transform: scale(0.97);
-            box-shadow:
-                0 2px 8px rgba(37, 99, 235, 0.25),
-                0 0px 1px rgba(255, 255, 255, 0.10) inset;
-            transition: all 0.06s ease;
+        }
+
+        .button-row {
+            display: flex;
+            gap: 14px;
+            margin-top: 24px;
         }
 
         /* Modal overlay */
@@ -322,80 +315,80 @@
             z-index: 50;
             align-items: center;
             justify-content: center;
-            animation: fadeIn 0.2s ease;
             border-radius: 20px;
         }
         .modal-overlay.active {
             display: flex;
+            animation: fadeIn 0.2s ease;
         }
         @keyframes fadeIn {
-            from {
-                opacity: 0;
-            }
-            to {
-                opacity: 1;
-            }
+            from { opacity: 0; }
+            to { opacity: 1; }
         }
 
-        /* Modal dialog */
         .modal-dialog {
-            background: #ffffff;
+            background: #fff;
             border-radius: 18px;
             padding: 28px 24px 22px;
             width: 85%;
-            max-width: 340px;
+            max-width: 360px;
             text-align: center;
-            box-shadow: 0 20px 50px rgba(0, 0, 0, 0.25);
+            box-shadow: 0 20px 50px rgba(0,0,0,0.25);
             animation: dialogPop 0.28s cubic-bezier(0.34, 1.56, 0.64, 1);
-            position: relative;
         }
         @keyframes dialogPop {
-            from {
-                opacity: 0;
-                transform: scale(0.85);
-            }
-            to {
-                opacity: 1;
-                transform: scale(1);
-            }
-        }
-        .modal-icon-circle {
-            width: 56px;
-            height: 56px;
-            border-radius: 50%;
-            background: #fef2f2;
-            margin: 0 auto 16px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 26px;
-            color: #ef4444;
-            box-shadow: 0 4px 16px rgba(239, 68, 68, 0.18);
+            from { opacity: 0; transform: scale(0.85); }
+            to { opacity: 1; transform: scale(1); }
         }
         .modal-close-btn {
-            display: inline-block;
             margin-top: 18px;
             padding: 10px 32px;
             font-size: 15px;
             font-weight: 600;
-            letter-spacing: 0.2px;
             border-radius: 10px;
             border: none;
             cursor: pointer;
             background: #2563eb;
-            color: #ffffff;
-            transition: all 0.2s ease;
-            box-shadow: 0 3px 10px rgba(37, 99, 235, 0.25);
+            color: #fff;
+            transition: 0.2s;
+            box-shadow: 0 3px 10px rgba(37,99,235,0.25);
         }
         .modal-close-btn:hover {
             background: #1d4ed8;
-            box-shadow: 0 5px 16px rgba(37, 99, 235, 0.35);
-        }
-        .modal-close-btn:active {
-            transform: scale(0.95);
+            box-shadow: 0 5px 16px rgba(37,99,235,0.35);
         }
 
-        /* Responsive adjustments */
+        /* Player expired screen */
+        .expired-screen {
+            display: none;
+            position: absolute;
+            inset: 0;
+            background: #fff;
+            z-index: 100;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            border-radius: 20px;
+            padding: 40px;
+        }
+        .expired-screen.active {
+            display: flex;
+        }
+        .expired-icon {
+            width: 64px;
+            height: 64px;
+            border-radius: 50%;
+            background: #fef2f2;
+            color: #ef4444;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 30px;
+            margin-bottom: 18px;
+            box-shadow: 0 4px 14px rgba(239,68,68,0.2);
+        }
+
+        /* Responsive */
         @media (max-width: 680px) {
             .page-wrapper {
                 width: 100%;
@@ -413,44 +406,20 @@
                 border-radius: 0;
                 padding: 14px 14px 16px;
             }
-            .func-card {
-                padding: 16px 14px 14px;
+            .button-row {
+                flex-direction: column;
             }
-            .btn-submit,
-            .btn-check {
-                padding: 13px 16px;
-                font-size: 16px;
-                min-height: 48px;
-                border-radius: 13px;
-            }
-            .header-icon-circle {
-                width: 40px;
-                height: 40px;
-                border-radius: 12px;
-            }
-            .func-icon {
-                width: 38px;
-                height: 38px;
-                border-radius: 11px;
-            }
-            .modal-overlay {
-                border-radius: 0;
-            }
-            .header-decor {
-                display: none;
+            .btn-generate, .btn-check {
+                width: 100%;
             }
         }
     </style>
 </head>
 <body>
+    <main class="page-wrapper" id="pageWrapper" role="main" aria-label="Tomb Busters Ticket System">
 
-    <main class="page-wrapper" role="main" aria-label="Tomb Busters Ticket System">
-
-        <!-- Header -->
-        <div class="header-card">
-            <!-- Decorative floating diamond -->
-            <div class="header-decor" aria-hidden="true"></div>
-
+        <!-- HEADER (shown in staff mode) -->
+        <div id="staffHeader" class="header-card">
             <div style="display:flex;align-items:center;gap:14px;position:relative;z-index:1;">
                 <div class="header-icon-circle" aria-hidden="true">
                     <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
@@ -459,439 +428,341 @@
                     </svg>
                 </div>
                 <div>
-                    <h1 style="font-size:21px;font-weight:700;color:#ffffff;margin:0;line-height:1.3;letter-spacing:0.2px;">
+                    <h1 style="font-size:21px;font-weight:700;color:#fff;margin:0;line-height:1.3;">
                         Tomb Busters Ticket System
                     </h1>
-                    <p style="font-size:13px;color:rgba(255,255,255,0.78);margin:3px 0 0;letter-spacing:0.15px;">
-                        Player support center
+                    <p style="font-size:13px;color:rgba(255,255,255,0.78);margin:3px 0 0;">
+                        Staff link generator
                     </p>
                 </div>
             </div>
         </div>
 
-        <!-- Content Area -->
-        <div class="content-card">
-
-            <!-- Submit Ticket Card -->
-            <div class="func-card">
-                <div style="display:flex;align-items:center;gap:12px;margin-bottom:14px;">
-                    <div class="func-icon icon-submit" aria-hidden="true">
-                        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
-                            <path d="M12 5v14M5 12h14"/>
-                        </svg>
-                    </div>
-                    <span style="font-size:16px;font-weight:600;color:#1f2937;letter-spacing:0.15px;">
-                        Submit a Ticket
-                    </span>
+        <!-- CONTENT (staff mode) -->
+        <div id="staffContent" class="content-card">
+            <!-- Ticket Type collapsible -->
+            <div class="collapsible" id="collapsibleType">
+                <div class="collapsible-header" id="headerType">
+                    <span>Ticket Type</span>
+                    <svg class="arrow" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+                        <path d="M6 9l6 6 6-6"/>
+                    </svg>
                 </div>
-                <button
-                id="btnSubmit"
-                class="btn-submit"
-                aria-label="Submit a new support ticket"
-                title="Submit Ticket"
-                disabled
-            >
-            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
-                <path d="M12 5v14M5 12h14"/>
-            </svg>
-            Submit Ticket
-        </button>
-    </div>
+                <div class="collapsible-body" id="bodyType">
+                    <label class="radio-label" data-group="ticketType" data-value="report">
+                        <input type="radio" name="ticketType" value="report"> Report
+                    </label>
+                    <label class="radio-label" data-group="ticketType" data-value="bug">
+                        <input type="radio" name="ticketType" value="bug"> BUG
+                    </label>
+                    <label class="radio-label" data-group="ticketType" data-value="suggestion">
+                        <input type="radio" name="ticketType" value="suggestion"> Suggestion
+                    </label>
+                </div>
+            </div>
 
-    <!-- Check Ticket Card -->
-    <div class="func-card">
-        <div style="display:flex;align-items:center;gap:12px;margin-bottom:14px;">
-            <div class="func-icon icon-check" aria-hidden="true">
-                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
-                    <circle cx="11" cy="11" r="8"/>
-                    <path d="M21 21l-4.35-4.35"/>
+            <!-- Feedback Channel collapsible -->
+            <div class="collapsible" id="collapsibleChannel">
+                <div class="collapsible-header" id="headerChannel">
+                    <span>Feedback Channel</span>
+                    <svg class="arrow" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+                        <path d="M6 9l6 6 6-6"/>
+                    </svg>
+                </div>
+                <div class="collapsible-body" id="bodyChannel">
+                    <label class="radio-label" data-group="feedbackChannel" data-value="facebook">
+                        <input type="radio" name="feedbackChannel" value="facebook"> Facebook
+                    </label>
+                    <label class="radio-label" data-group="feedbackChannel" data-value="instagram">
+                        <input type="radio" name="feedbackChannel" value="instagram"> Instagram
+                    </label>
+                    <label class="radio-label" data-group="feedbackChannel" data-value="discord">
+                        <input type="radio" name="feedbackChannel" value="discord"> Discord
+                    </label>
+                </div>
+            </div>
+
+            <!-- Buttons -->
+            <div class="button-row">
+                <button id="btnGenerate" class="btn-generate">Generate Ticket Link</button>
+                <button id="btnCheck" class="btn-check">Check Ticket</button>
+            </div>
+        </div>
+
+        <!-- PLAYER EXPIRED SCREEN -->
+        <div id="expiredScreen" class="expired-screen">
+            <div class="expired-icon">
+                <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+                    <circle cx="12" cy="12" r="10"/>
+                    <line x1="12" y1="8" x2="12" y2="13"/>
+                    <circle cx="12" cy="16.5" r="0.8" fill="currentColor" stroke="none"/>
                 </svg>
             </div>
-            <span style="font-size:16px;font-weight:600;color:#1f2937;letter-spacing:0.15px;">
-                Check Ticket Status
-            </span>
+            <h2 style="font-size:22px;font-weight:700;color:#1f2937;margin:0 0 10px;">Link expired</h2>
+            <p style="font-size:14px;color:#6b7280;text-align:center;line-height:1.6;max-width:280px;">
+                This one‑time link has already been used or is no longer valid.
+            </p>
         </div>
-        <button
-        id="btnCheck"
-        class="btn-check"
-        aria-label="Check existing ticket status"
-        title="Check Ticket"
-    >
-    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
-        <circle cx="11" cy="11" r="8"/>
-        <path d="M21 21l-4.35-4.35"/>
-    </svg>
-    Check Ticket
-</button>
-</div>
-</div>
 
-<!-- Modal Overlay -->
-<div id="modalOverlay" class="modal-overlay" aria-hidden="true" role="dialog" aria-modal="true" aria-label="Expired notification">
-    <div class="modal-dialog">
-        <div class="modal-icon-circle" aria-hidden="true">
-            <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
-                <circle cx="12" cy="12" r="10"/>
-                <line x1="12" y1="8" x2="12" y2="13"/>
-                <circle cx="12" cy="16.5" r="0.8" fill="currentColor" stroke="none"/>
-            </svg>
+        <!-- MODAL for generated link -->
+        <div id="modalOverlay" class="modal-overlay">
+            <div class="modal-dialog">
+                <h3 style="font-size:18px;font-weight:700;color:#1f2937;margin-bottom:12px;">Ticket Link Generated</h3>
+                <p style="font-size:13px;color:#6b7280;margin-bottom:8px;">Copy this one‑time link and send it to the player.</p>
+                <div id="generatedLinkDisplay" style="background:#f1f5f9;padding:12px;border-radius:10px;word-break:break-all;font-size:13px;color:#1e40af;text-align:left;max-height:100px;overflow-y:auto;">
+                </div>
+                <div style="display:flex;gap:10px;margin-top:18px;">
+                    <button id="btnCopyLink" class="modal-close-btn" style="flex:1;">Copy Link</button>
+                    <button id="btnTestLink" class="modal-close-btn" style="flex:1;background:#059669;">Test Open</button>
+                </div>
+                <button id="btnCloseModal" class="modal-close-btn" style="width:100%;margin-top:10px;background:transparent;color:#6b7280;border:1px solid #d1d5db;box-shadow:none;">Close</button>
+            </div>
         </div>
-        <p style="font-size:18px;font-weight:700;color:#1f2937;margin:0 0 6px;letter-spacing:0.2px;">
-            Link expired
-        </p>
-        <p style="font-size:13px;color:#6b7280;margin:0 0 2px;line-height:1.5;">
-            The submission window has closed or this link has already been used.
-        </p>
-        <button id="modalCloseBtn" class="modal-close-btn" type="button">
-            OK
-        </button>
-    </div>
-</div>
+    </main>
 
-</main>
+    <script>
+        (function() {
+            // ========== DOM ELEMENTS ==========
+            const pageWrapper = document.getElementById('pageWrapper');
+            const staffHeader = document.getElementById('staffHeader');
+            const staffContent = document.getElementById('staffContent');
+            const expiredScreen = document.getElementById('expiredScreen');
+            const collapsibleType = document.getElementById('collapsibleType');
+            const collapsibleChannel = document.getElementById('collapsibleChannel');
+            const headerType = document.getElementById('headerType');
+            const headerChannel = document.getElementById('headerChannel');
+            const btnGenerate = document.getElementById('btnGenerate');
+            const btnCheck = document.getElementById('btnCheck');
+            const modalOverlay = document.getElementById('modalOverlay');
+            const generatedLinkDisplay = document.getElementById('generatedLinkDisplay');
+            const btnCopyLink = document.getElementById('btnCopyLink');
+            const btnTestLink = document.getElementById('btnTestLink');
+            const btnCloseModal = document.getElementById('btnCloseModal');
 
-<script>
-    (function() {
-        // ============================================================
-        // Constants
-        // ============================================================
-        const SUBMIT_URL =
-            'https://giantnetwork.qiyukf.com/worksheet/page/plugin/submit?pluginId=a105e6dee58a4b778686440c1418f704&type=1';
-        const CHECK_URL =
-            'https://giantnetwork.qiyukf.com/worksheet/page/plugin/list?pluginId=a105e6dee58a4b778686440c1418f704&type=1';
-        const WINDOW_MINUTES = 5; // Submission window: 5 minutes
-        const WINDOW_MS = WINDOW_MINUTES * 60 * 1000;
-        const STORAGE_KEY = 'tomb_ticket_session_v2'; // Key for localStorage
+            // ========== CONSTANTS ==========
+            const BASE_SUBMIT_URL = 'https://giantnetwork.qiyukf.com/worksheet/page/plugin/submit?pluginId=a105e6dee58a4b778686440c1418f704&type=1';
+            const CHECK_URL = 'https://giantnetwork.qiyukf.com/worksheet/page/plugin/list?pluginId=a105e6dee58a4b778686440c1418f704&type=1';
+            const STORAGE_PREFIX = 'tomb_ticket_link_';
 
-        // ============================================================
-        // DOM Elements
-        // ============================================================
-        const btnSubmit = document.getElementById('btnSubmit');
-        const btnCheck = document.getElementById('btnCheck');
-        const modalOverlay = document.getElementById('modalOverlay');
-        const modalCloseBtn = document.getElementById('modalCloseBtn');
+            // ========== STATE ==========
+            let selectedType = null;
+            let selectedChannel = null;
+            let currentToken = null;
 
-        // ============================================================
-        // State
-        // ============================================================
-        let sessionData = null; // { code, createdAt, used }
-        let windowTimerId = null; // Timer for 5‑minute auto‑expiry
+            // ========== HELPERS ==========
+            function safeGetItem(key) { try { return localStorage.getItem(key); } catch(e) { return null; } }
+            function safeSetItem(key, value) { try { localStorage.setItem(key, value); return true; } catch(e) { return false; } }
 
-        // ============================================================
-        // Safe localStorage helpers
-        // ============================================================
-        function safeGetItem(key) {
-            try {
-                return localStorage.getItem(key);
-            } catch (e) {
-                return null;
+            // Generate unique token
+            function generateToken() {
+                return Date.now().toString(36) + '_' + Math.random().toString(36).substring(2, 10);
             }
-        }
 
-        function safeSetItem(key, value) {
-            try {
-                localStorage.setItem(key, value);
-                return true;
-            } catch (e) {
-                return false;
+            // Build the real submit URL with ticket params
+            function buildRealUrl(type, channel) {
+                const url = new URL(BASE_SUBMIT_URL);
+                url.searchParams.set('ticketType', type);
+                url.searchParams.set('feedbackChannel', channel);
+                return url.toString();
             }
-        }
 
-        function safeRemoveItem(key) {
-            try {
-                localStorage.removeItem(key);
-                return true;
-            } catch (e) {
-                return false;
+            // Build the one‑time link (current page URL + token hash)
+            function buildOneTimeLink(token) {
+                const base = window.location.href.split('#')[0];
+                return base + '#token=' + token;
             }
-        }
 
-        // ============================================================
-        // Generate a unique time‑based code
-        // Format: timestamp_randomHex
-        // ============================================================
-        function generateUniqueCode() {
-            const now = Date.now();
-            const randomPart = Math.random().toString(36).substring(2, 12);
-            return now.toString(36) + '_' + randomPart;
-        }
+            // Save token data to localStorage
+            function saveTokenData(token, type, channel) {
+                const data = {
+                    token: token,
+                    ticketType: type,
+                    feedbackChannel: channel,
+                    used: false,
+                    createdAt: Date.now()
+                };
+                safeSetItem(STORAGE_PREFIX + token, JSON.stringify(data));
+            }
 
-        // ============================================================
-        // Load existing session from localStorage, or create a new one
-        // ============================================================
-        function loadOrCreateSession() {
-            const stored = safeGetItem(STORAGE_KEY);
-            if (stored) {
+            // Check if token is valid (exists and unused)
+            function isTokenValid(token) {
+                const raw = safeGetItem(STORAGE_PREFIX + token);
+                if (!raw) return false;
                 try {
-                    const parsed = JSON.parse(stored);
-                    // Validate structure
-                    if (parsed && typeof parsed.code === 'string' &&
-                        typeof parsed.createdAt === 'number' &&
-                        typeof parsed.used === 'boolean') {
-                        // Check if the session is still within the 5‑minute window
-                        const age = Date.now() - parsed.createdAt;
-                        if (age < WINDOW_MS) {
-                            // Session is still valid (may be used or unused)
-                            return parsed;
+                    const data = JSON.parse(raw);
+                    return data && data.used === false;
+                } catch(e) {
+                    return false;
+                }
+            }
+
+            // Mark token as used
+            function markTokenUsed(token) {
+                const raw = safeGetItem(STORAGE_PREFIX + token);
+                if (!raw) return;
+                try {
+                    const data = JSON.parse(raw);
+                    data.used = true;
+                    safeSetItem(STORAGE_PREFIX + token, JSON.stringify(data));
+                } catch(e) {}
+            }
+
+            // Get stored ticket info for token
+            function getTokenInfo(token) {
+                const raw = safeGetItem(STORAGE_PREFIX + token);
+                if (!raw) return null;
+                try {
+                    return JSON.parse(raw);
+                } catch(e) {
+                    return null;
+                }
+            }
+
+            // ========== PLAYER VERIFICATION MODE ==========
+            function checkPlayerMode() {
+                const hash = window.location.hash;
+                if (hash.startsWith('#token=')) {
+                    const token = hash.substring(7);
+                    if (isTokenValid(token)) {
+                        // Valid token – mark as used and redirect to real URL
+                        const info = getTokenInfo(token);
+                        markTokenUsed(token);
+                        if (info && info.ticketType && info.feedbackChannel) {
+                            window.location.replace(buildRealUrl(info.ticketType, info.feedbackChannel));
+                        } else {
+                            window.location.replace(BASE_SUBMIT_URL);
                         }
-                        // Session expired – it will be replaced below
+                    } else {
+                        // Token invalid or already used – show expired screen
+                        staffHeader.style.display = 'none';
+                        staffContent.style.display = 'none';
+                        expiredScreen.classList.add('active');
                     }
-                } catch (e) {
-                    // Corrupted data – ignore and create new
+                    return true; // player mode active
                 }
-            }
-            // No valid session found – create a brand‑new one
-            const newSession = {
-                code: generateUniqueCode(),
-                createdAt: Date.now(),
-                used: false,
-            };
-            safeSetItem(STORAGE_KEY, JSON.stringify(newSession));
-            return newSession;
-        }
-
-        // ============================================================
-        // Save the current session data to localStorage
-        // ============================================================
-        function saveSession() {
-            if (sessionData) {
-                safeSetItem(STORAGE_KEY, JSON.stringify(sessionData));
-            }
-        }
-
-        // ============================================================
-        // Check if submission is currently allowed
-        // ============================================================
-        function canSubmit() {
-            if (!sessionData) return false;
-            const now = Date.now();
-            // Must be within the 5‑minute window
-            if (now - sessionData.createdAt >= WINDOW_MS) return false;
-            // Must not have been used yet
-            if (sessionData.used) return false;
-            return true;
-        }
-
-        // ============================================================
-        // Update the submit button visual state
-        // ============================================================
-        function updateSubmitButtonState() {
-            if (canSubmit()) {
-                btnSubmit.disabled = false;
-                btnSubmit.setAttribute('aria-disabled', 'false');
-                btnSubmit.title = 'Submit a new ticket';
-            } else {
-                btnSubmit.disabled = true;
-                btnSubmit.setAttribute('aria-disabled', 'true');
-                btnSubmit.title = 'Submission unavailable';
-            }
-        }
-
-        // ============================================================
-        // Show the "Link expired" modal dialog
-        // ============================================================
-        function showExpiredModal() {
-            modalOverlay.classList.add('active');
-            modalOverlay.setAttribute('aria-hidden', 'false');
-            // Focus the close button for accessibility
-            setTimeout(function() {
-                modalCloseBtn.focus();
-            }, 100);
-        }
-
-        // ============================================================
-        // Hide the modal dialog
-        // ============================================================
-        function hideExpiredModal() {
-            modalOverlay.classList.remove('active');
-            modalOverlay.setAttribute('aria-hidden', 'true');
-        }
-
-        // ============================================================
-        // Handle the 5‑minute window expiration (auto‑disable)
-        // ============================================================
-        function onWindowExpire() {
-            windowTimerId = null;
-            updateSubmitButtonState();
-            // Clean up expired session so a page refresh generates a fresh one
-            if (sessionData && Date.now() - sessionData.createdAt >= WINDOW_MS) {
-                safeRemoveItem(STORAGE_KEY);
-            }
-        }
-
-        // ============================================================
-        // Schedule the auto‑expiry timer
-        // ============================================================
-        function scheduleWindowExpiration() {
-            if (windowTimerId) clearTimeout(windowTimerId);
-            if (!sessionData) return;
-            const elapsed = Date.now() - sessionData.createdAt;
-            const remaining = WINDOW_MS - elapsed;
-            if (remaining <= 0) {
-                onWindowExpire();
-            } else {
-                windowTimerId = setTimeout(onWindowExpire, remaining + 80);
-            }
-        }
-
-        // ============================================================
-        // Button click handlers
-        // ============================================================
-        function handleSubmitClick(event) {
-            event.preventDefault();
-
-            // Re‑evaluate in real time
-            if (!canSubmit()) {
-                // Show the modal with "Link expired"
-                showExpiredModal();
-                // Brief button shake feedback
-                btnSubmit.style.transform = 'scale(0.94)';
-                setTimeout(function() {
-                    btnSubmit.style.transform = '';
-                }, 140);
-                return false;
+                return false; // staff mode
             }
 
-            // Mark session as used
-            sessionData.used = true;
-            saveSession();
-
-            // Update button immediately
-            updateSubmitButtonState();
-
-            // Clear the expiry timer since submission happened
-            if (windowTimerId) {
-                clearTimeout(windowTimerId);
-                windowTimerId = null;
+            // ========== COLLAPSIBLE LOGIC ==========
+            function toggleCollapsible(header, body, container) {
+                container.classList.toggle('open');
             }
 
-            // Navigate to the submit URL
-            window.location.href = SUBMIT_URL;
-            return true;
-        }
-
-        function handleCheckClick(event) {
-            // Always allowed – no restrictions
-            window.location.href = CHECK_URL;
-        }
-
-        // ============================================================
-        // Modal event handlers
-        // ============================================================
-        function handleModalClose(event) {
-            event.preventDefault();
-            hideExpiredModal();
-            // Return focus to the submit button
-            btnSubmit.focus();
-        }
-
-        function handleOverlayClick(event) {
-            // Close only if the click target is the overlay itself (not the dialog)
-            if (event.target === modalOverlay) {
-                hideExpiredModal();
-                btnSubmit.focus();
-            }
-        }
-
-        function handleModalKeydown(event) {
-            if (event.key === 'Escape') {
-                hideExpiredModal();
-                btnSubmit.focus();
-            }
-            // Trap focus inside modal
-            if (event.key === 'Tab') {
-                const focusable = modalOverlay.querySelectorAll(
-                    'button, [tabindex]:not([tabindex="-1"])');
-                if (focusable.length === 0) return;
-                const first = focusable[0];
-                const last = focusable[focusable.length - 1];
-                if (event.shiftKey && document.activeElement === first) {
-                    event.preventDefault();
-                    last.focus();
-                } else if (!event.shiftKey && document.activeElement === last) {
-                    event.preventDefault();
-                    first.focus();
-                }
-            }
-        }
-
-        // ============================================================
-        // Initialize the page
-        // ============================================================
-        function init() {
-            // 1. Load or create session
-            sessionData = loadOrCreateSession();
-
-            // 2. Update submit button state
-            updateSubmitButtonState();
-
-            // 3. Schedule the 5‑minute auto‑expiry
-            scheduleWindowExpiration();
-
-            // 4. Attach button listeners
-            btnSubmit.addEventListener('click', handleSubmitClick);
-            btnCheck.addEventListener('click', handleCheckClick);
-
-            // 5. Attach modal listeners
-            modalCloseBtn.addEventListener('click', handleModalClose);
-            modalOverlay.addEventListener('click', handleOverlayClick);
-            document.addEventListener('keydown', handleModalKeydown);
-
-            // 6. Prevent double‑tap zoom on mobile buttons
-            [btnSubmit, btnCheck].forEach(function(btn) {
-                btn.addEventListener('touchstart', function() {}, { passive: true });
+            headerType.addEventListener('click', function() {
+                toggleCollapsible(headerType, document.getElementById('bodyType'), collapsibleType);
+            });
+            headerChannel.addEventListener('click', function() {
+                toggleCollapsible(headerChannel, document.getElementById('bodyChannel'), collapsibleChannel);
             });
 
-            // 7. Debug logging
-            console.log('[TicketSystem] Session code:', sessionData.code);
-            console.log('[TicketSystem] Created at:', new Date(sessionData.createdAt).toISOString());
-            console.log('[TicketSystem] Used:', sessionData.used);
-            console.log('[TicketSystem] Can submit:', canSubmit());
-            if (!sessionData.used) {
-                const remaining = Math.max(0, WINDOW_MS - (Date.now() - sessionData.createdAt));
-                console.log('[TicketSystem] Window remaining:',
-                    Math.floor(remaining / 60000) + 'm ' +
-                    Math.floor((remaining % 60000) / 1000) + 's');
-            }
-        }
+            // ========== RADIO SELECTION ==========
+            document.querySelectorAll('.radio-label').forEach(function(label) {
+                label.addEventListener('click', function(e) {
+                    const group = this.dataset.group;
+                    const value = this.dataset.value;
+                    // Unselect all in group
+                    document.querySelectorAll('.radio-label[data-group="' + group + '"]').forEach(function(l) {
+                        l.classList.remove('selected');
+                        const radio = l.querySelector('input[type="radio"]');
+                        if (radio) radio.checked = false;
+                    });
+                    // Select current
+                    this.classList.add('selected');
+                    const radio = this.querySelector('input[type="radio"]');
+                    if (radio) radio.checked = true;
 
-        // ============================================================
-        // Handle tab visibility changes
-        // ============================================================
-        document.addEventListener('visibilitychange', function() {
-            if (!document.hidden && sessionData) {
-                // Re‑check state when user returns
-                updateSubmitButtonState();
-                // Re‑schedule timer if still within window and not expired
-                if (canSubmit() && !windowTimerId) {
-                    scheduleWindowExpiration();
+                    if (group === 'ticketType') selectedType = value;
+                    if (group === 'feedbackChannel') selectedChannel = value;
+                });
+            });
+
+            // ========== MODAL ==========
+            function showModal(link) {
+                generatedLinkDisplay.textContent = link;
+                modalOverlay.classList.add('active');
+                currentToken = link.split('token=')[1];
+            }
+            function hideModal() {
+                modalOverlay.classList.remove('active');
+                currentToken = null;
+            }
+
+            btnCloseModal.addEventListener('click', hideModal);
+            modalOverlay.addEventListener('click', function(e) {
+                if (e.target === modalOverlay) hideModal();
+            });
+
+            // Copy link
+            btnCopyLink.addEventListener('click', function() {
+                const text = generatedLinkDisplay.textContent;
+                if (navigator.clipboard) {
+                    navigator.clipboard.writeText(text).then(function() {
+                        btnCopyLink.textContent = 'Copied!';
+                        setTimeout(function() { btnCopyLink.textContent = 'Copy Link'; }, 2000);
+                    });
+                } else {
+                    // Fallback
+                    const ta = document.createElement('textarea');
+                    ta.value = text;
+                    document.body.appendChild(ta);
+                    ta.select();
+                    document.execCommand('copy');
+                    document.body.removeChild(ta);
+                    btnCopyLink.textContent = 'Copied!';
+                    setTimeout(function() { btnCopyLink.textContent = 'Copy Link'; }, 2000);
                 }
-                if (!canSubmit() && windowTimerId) {
-                    clearTimeout(windowTimerId);
-                    windowTimerId = null;
+            });
+
+            // Test open (simulate player first visit)
+            btnTestLink.addEventListener('click', function() {
+                if (!currentToken) return;
+                if (isTokenValid(currentToken)) {
+                    const info = getTokenInfo(currentToken);
+                    markTokenUsed(currentToken);
+                    hideModal();
+                    if (info && info.ticketType && info.feedbackChannel) {
+                        window.open(buildRealUrl(info.ticketType, info.feedbackChannel), '_blank');
+                    } else {
+                        window.open(BASE_SUBMIT_URL, '_blank');
+                    }
+                } else {
+                    alert('This link has already been used or is expired.');
                 }
-            }
-        });
+            });
 
-        // ============================================================
-        // Clean up on unload
-        // ============================================================
-        window.addEventListener('beforeunload', function() {
-            if (windowTimerId) {
-                clearTimeout(windowTimerId);
-                windowTimerId = null;
-            }
-        });
+            // ========== GENERATE BUTTON ==========
+            btnGenerate.addEventListener('click', function() {
+                if (!selectedType || !selectedChannel) {
+                    alert('Please select both Ticket Type and Feedback Channel.');
+                    return;
+                }
+                const token = generateToken();
+                saveTokenData(token, selectedType, selectedChannel);
+                const link = buildOneTimeLink(token);
+                showModal(link);
+            });
 
-        // ============================================================
-        // Start when DOM is ready
-        // ============================================================
-        if (document.readyState === 'loading') {
-            document.addEventListener('DOMContentLoaded', init);
-        } else {
-            init();
-        }
-    })();
-</script>
+            // ========== CHECK BUTTON ==========
+            btnCheck.addEventListener('click', function() {
+                window.open(CHECK_URL, '_blank');
+            });
+
+            // ========== INIT ==========
+            if (!checkPlayerMode()) {
+                // Staff mode: ensure everything visible
+                staffHeader.style.display = 'block';
+                staffContent.style.display = 'block';
+                expiredScreen.classList.remove('active');
+                // Open first collapsible by default
+                collapsibleType.classList.add('open');
+            }
+
+            // Clean up hash if staff mode (so page works normally)
+            if (window.location.hash && !checkPlayerMode()) {
+                // This shouldn't happen as checkPlayerMode already handled player tokens
+                // But for any leftover hash, just remove it in staff mode
+            }
+        })();
+    </script>
 </body>
 </html>
